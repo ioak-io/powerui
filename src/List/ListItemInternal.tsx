@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Checkbox, SvgIcon, ThemeType } from "basicui";
 import { formatDate } from "../utils/DateUtils";
 import { SpecDefinition } from "../types/DynamicFormTypes";
@@ -11,7 +11,6 @@ export interface ListItemInternalProps {
     data: Record<string, any>;
     children?: React.ReactNode;
     showSelectOnRight?: boolean;
-    showCollapse?: boolean;
 }
 
 const stripHtml = (html: string): string => {
@@ -23,6 +22,13 @@ const stripHtml = (html: string): string => {
 const ListItemInternal = (props: ListItemInternalProps) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const { data, specDefinition } = props;
+    const [showCollapse, setShowCollapse] = useState(false);
+
+    useEffect(() => {
+        setShowCollapse(
+            !!props.specDefinition.displayOptions?.list.fields.find(item => item.collapse)
+        )
+    }, [props.specDefinition])
 
     const handleClick = () => {
         props.onClick?.(data.id);
@@ -33,8 +39,12 @@ const ListItemInternal = (props: ListItemInternalProps) => {
         setIsExpanded(prev => !prev);
     };
 
+    const getNestedValue = (obj: any, path: string): any => {
+        return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+    }
+
     const renderField = (field: any) => {
-        const value = data[field.key];
+        const value = getNestedValue(data, field.key);
         if (value == null) return null;
 
         const content = (() => {
@@ -87,7 +97,7 @@ const ListItemInternal = (props: ListItemInternalProps) => {
 
     return (
         <div className="basicui-listitem">
-            {props.showCollapse && (
+            {showCollapse && (
                 <div className="basicui-listitem__left">
                     <button className="basicui-clean-button basicui-listitem__expand" onClick={toggleExpand}>
                         <SvgIcon height="16px" width="16px">
@@ -122,7 +132,9 @@ const ListItemInternal = (props: ListItemInternalProps) => {
                 }}
             >
                 <div className="basicui-listitem__main__content">
-                    {specDefinition.displayOptions?.list.fields.map(renderField)}
+                    {specDefinition.displayOptions?.list.fields.map(
+                        (item) => (<>{(isExpanded || !item.collapse) && renderField(item)}</>)
+                    )}
                 </div>
             </div>
 
