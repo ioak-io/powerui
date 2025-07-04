@@ -2,7 +2,7 @@
     display: inline-grid;
     flex-direction: column;
     row-gap: 12px;
-    justify-items: flex-start;
+    /* justify-items: flex-start; */
 }
 
 .powerui-renderfield-basic__reply {
@@ -11,6 +11,7 @@
     padding: 12px;
     border-radius: 12px;
     background-color: var(--basicui-bg-card);
+    width: 50%;
 }
 
 .powerui-renderfield-basic__reply__input {
@@ -20,5 +21,6 @@
     border: none;
     background-color: transparent;
     color: var(--basicui-fg);
+    width: 100%;
     transition: 250ms border-color ease-in-out, 250ms background-color ease-in-out, 250ms color ease-in-out;
 }

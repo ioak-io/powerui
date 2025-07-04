@@ -2,16 +2,19 @@
     display: inline-grid;
     flex-direction: column;
     row-gap: 12px;
-    justify-items: flex-start;
+    /* justify-items: flex-start; */
+    width: 100%;
 }
 
 .powerui-renderfield-textarea__reply {
-    display: flex;
+    display: grid;
     /* border: 1px solid var(--basicui-border-color); */
     padding: 12px;
     border-radius: 12px;
     background-color: var(--basicui-bg-card);
     align-items: flex-end;
+    grid-template-columns: 1fr auto;
+    width: 50%;
 }
 
 .powerui-renderfield-textarea__reply__input {

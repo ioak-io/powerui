@@ -10,7 +10,6 @@ interface RenderFieldProps {
     formData: any;
     path?: string;
     onChange: (name: string, value: any) => void;
-    onSubmit: () => void;
 }
 
 const RenderField: React.FC<RenderFieldProps> = (props: RenderFieldProps) => {
@@ -35,7 +34,6 @@ const RenderField: React.FC<RenderFieldProps> = (props: RenderFieldProps) => {
                     formData={props.formData}
                     path={props.path}
                     onChange={onChange}
-                    onSubmit={props.onSubmit}
                 />
             );
 
@@ -47,7 +45,6 @@ const RenderField: React.FC<RenderFieldProps> = (props: RenderFieldProps) => {
                     formData={props.formData}
                     path={props.path}
                     onChange={onChange}
-                    onSubmit={props.onSubmit}
                 />
             );
 

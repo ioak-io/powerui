@@ -106,11 +106,23 @@ const fragmentSchema: FormSchema = {
   ],
 }
 
+const formData: Record<string, any> = {
+
+};
+
 
 const ConversationalFormDemo = () => {
+  const [formData, setFormData] = useState<Record<string, any>>({});
+  const handleChange = (_formData: Record<string, any>) => {
+    console.log(_formData);
+    setFormData(_formData);
+  }
   return (
     <div className="conversational-form-demo">
-      <ConversationalForm mode="create" schema={schema} onSubmit={(e) => { console.log(e) }} />
+      <ConversationalForm mode="create"
+        formData={formData}
+        onChange={handleChange}
+        schema={schema} onSubmit={(e) => { console.log(e) }} />
     </div>
   );
 };

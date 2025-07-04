@@ -4,6 +4,9 @@
     padding: 12px 12px;
     background-color: var(--basicui-bg-surface);
     display: inline-grid;
+    justify-self: flex-start;
+    color: var(--basicui-fg);
+  width: fit-content;
 }
 
 .powerui-displaycontainer--primary {
@@ -14,4 +17,9 @@
 
 .basicui-dark .powerui-displaycontainer--primary {
     color: #fff;
+}
+
+button.powerui-displaycontainer {
+    justify-items: flex-start;
+    border: none;
 }

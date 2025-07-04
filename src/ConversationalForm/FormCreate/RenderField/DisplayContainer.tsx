@@ -6,6 +6,7 @@ import { getClassName } from '../../../utils/ClassNameUtils';
 interface DisplayContainerProps {
     children: any;
     colorMode?: "default" | "primary";
+    onClick?: () => void;
 }
 
 const DisplayContainer: React.FC<DisplayContainerProps> = (props: DisplayContainerProps) => {
@@ -13,9 +14,21 @@ const DisplayContainer: React.FC<DisplayContainerProps> = (props: DisplayContain
     const className = "powerui-displaycontainer";
 
     return (
-        <div className={getClassName(className, [], props.colorMode ? [props.colorMode] : [])}>
-            {props.children}
-        </div>
+        <>
+            {!props.onClick &&
+                <div className={getClassName(className, [], props.colorMode ? [props.colorMode] : [])}>
+                    {props.children}
+                </div>
+            }
+            {props.onClick &&
+                <button
+                    className={getClassName(className, [], props.colorMode ? [props.colorMode] : [], "")}
+                    onClick={props.onClick}
+                >
+                    {props.children}
+                </button>
+            }
+        </>
     );
 };
 

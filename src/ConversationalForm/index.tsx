@@ -7,7 +7,9 @@ import FormCreate from './FormCreate';
 export interface ConversationalFormProps {
     mode: "view" | "create" | "edit";
     onSubmit: (data: Record<string, any>) => void;
+    onChange: (data: Record<string, any>) => void;
     schema: FormSchema;
+    formData: Record<string, any>;
 }
 
 const ConversationalForm = ({ mode, ...restProps }: ConversationalFormProps) => {

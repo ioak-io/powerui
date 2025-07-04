@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormFieldSchema, FormSchema } from '../../types/FormSchemaTypes';
 import './style.css';
 import RenderField from './RenderField';
@@ -7,15 +7,20 @@ import DisplayContainer from './RenderField/DisplayContainer';
 
 interface FormCreateProps {
     schema: FormSchema;
+    formData: Record<string, any>;
     onSubmit: (data: Record<string, any>) => void;
+    onChange: (data: Record<string, any>) => void;
 }
 
 const FormCreate: React.FC<FormCreateProps> = (props: FormCreateProps) => {
-    const [formData, setFormData] = useState<Record<string, any>>({});
 
     const handleChange = (name: string, value: any) => {
-        setFormData(setValueAtPath(formData, name, value))
+        props.onChange(setValueAtPath(props.formData, name, value))
     }
+
+    useEffect(() => {
+        console.log(props.formData);
+    }, [props.formData]);
 
     const handleSubmit = (_field: FormFieldSchema) => {
         console.log(_field);
@@ -27,9 +32,8 @@ const FormCreate: React.FC<FormCreateProps> = (props: FormCreateProps) => {
                 <RenderField
                     key={index}
                     field={_field}
-                    formData={formData}
+                    formData={props.formData}
                     onChange={handleChange}
-                    onSubmit={() => handleSubmit(_field)}
                 />
             ))}
         </div>
