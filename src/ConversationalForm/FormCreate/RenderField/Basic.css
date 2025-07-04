@@ -1,0 +1,24 @@
+.powerui-renderfield-basic {
+    display: inline-grid;
+    flex-direction: column;
+    row-gap: 12px;
+    justify-items: flex-start;
+}
+
+.powerui-renderfield-basic__reply {
+    display: flex;
+    /* border: 1px solid var(--basicui-border-color); */
+    padding: 12px;
+    border-radius: 12px;
+    background-color: var(--basicui-bg-card);
+}
+
+.powerui-renderfield-basic__reply__input {
+    font-size: 16px;
+    text-overflow: ellipsis;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: var(--basicui-fg);
+    transition: 250ms border-color ease-in-out, 250ms background-color ease-in-out, 250ms color ease-in-out;
+}

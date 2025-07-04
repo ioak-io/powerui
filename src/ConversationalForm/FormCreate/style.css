@@ -1,0 +1,5 @@
+.powerui-formcreate {
+    display: flex;
+    row-gap: 36px;
+    flex-direction: column;
+}

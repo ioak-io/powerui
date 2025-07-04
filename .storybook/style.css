@@ -14,3 +14,11 @@ html body * {
 .powerui-dark {
     background-color: #2b2b2b;
 }
+
+#storybook-root {
+    height: 100%;
+}
+
+html, body {
+    height: 100%;
+}
