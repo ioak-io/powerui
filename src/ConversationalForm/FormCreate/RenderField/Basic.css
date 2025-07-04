@@ -7,10 +7,12 @@
 
 .powerui-renderfield-basic__reply {
     display: flex;
-    /* border: 1px solid var(--basicui-border-color); */
+    border: 1px solid var(--basicui-bg-primary);
     padding: 12px;
     border-radius: 12px;
     background-color: var(--basicui-bg-card);
+    /* background-color: var(--basicui-bg-primary);
+    color: var(--basicui-fg-primary); */
     width: 50%;
 }
 

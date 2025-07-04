@@ -4,12 +4,14 @@ import { getValueAtPath, setValueAtPath } from '../FieldUtils';
 import './style.css';
 import Basic from './Basic';
 import Textarea from './Textarea';
+import GroupField from './GroupField';
 
 interface RenderFieldProps {
     field: FormFieldSchema;
     formData: any;
     path?: string;
     onChange: (name: string, value: any) => void;
+    edit?: boolean;
 }
 
 const RenderField: React.FC<RenderFieldProps> = (props: RenderFieldProps) => {
@@ -29,7 +31,7 @@ const RenderField: React.FC<RenderFieldProps> = (props: RenderFieldProps) => {
         case 'number':
             return (
                 <Basic
-                    edit
+                    edit={props.edit}
                     field={props.field}
                     formData={props.formData}
                     path={props.path}
@@ -40,7 +42,7 @@ const RenderField: React.FC<RenderFieldProps> = (props: RenderFieldProps) => {
         case 'textarea':
             return (
                 <Textarea
-                    edit
+                    edit={props.edit}
                     field={props.field}
                     formData={props.formData}
                     path={props.path}
@@ -62,19 +64,13 @@ const RenderField: React.FC<RenderFieldProps> = (props: RenderFieldProps) => {
 
         case 'group':
             return (
-                <div className="powerui-formcreate__group">
-                    {props.field.fields?.map(sub => (
-                        <div key={sub.name}>
-                            <div className="powerui-formcreate__prompt">{sub.conversationalPrompt || sub.label}</div>
-                            <RenderField
-                                field={sub}
-                                formData={props.formData}
-                                path={`${props.field.name}.${sub.name}`}
-                                onChange={props.onChange}
-                            />
-                        </div>
-                    ))}
-                </div>
+                <GroupField
+                    edit={props.edit}
+                    field={props.field}
+                    formData={props.formData}
+                    path={props.path}
+                    onChange={onChange}
+                />
             );
 
         case 'array':

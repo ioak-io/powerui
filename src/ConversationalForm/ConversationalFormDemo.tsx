@@ -80,9 +80,50 @@ const addressSchema: FormFieldSchema = {
   ]
 }
 
+const productSchema: FormFieldSchema = {
+  name: "product",
+  type: "group",
+  label: "Product",
+  conversationalPrompt: "Product prompt",
+  fields: [
+    {
+      name: "name",
+      type: "text",
+      label: "Product name",
+      conversationalPrompt: "What's the name of this product?",
+    },
+    {
+      name: "link",
+      type: "text",
+      label: "URL",
+      conversationalPrompt: "Do you have a product link? Provide the product link to do the connection.",
+    },
+    {
+      name: "groupTest",
+      type: "group",
+      label: "Group test",
+      conversationalPrompt: "Group test prompt",
+      fields: [
+        {
+          name: "objone",
+          type: "text",
+          conversationalPrompt: "object one prompt",
+          label: "Object one"
+        },
+        {
+          name: "objtwo",
+          type: "text",
+          conversationalPrompt: "object two prompt",
+          label: "Object two"
+        }
+      ]
+    }
+  ]
+}
+
 const schema: FormSchema = {
   fields: [
-    genderField, contentSchema, addressSchema, ageField, userNameField
+    genderField, productSchema, contentSchema, addressSchema, ageField, userNameField
   ]
 }
 
@@ -106,17 +147,15 @@ const fragmentSchema: FormSchema = {
   ],
 }
 
-const formData: Record<string, any> = {
-
-};
-
-
 const ConversationalFormDemo = () => {
-  const [formData, setFormData] = useState<Record<string, any>>({});
+  const [formData, setFormData] = useState<Record<string, any>>({
+    age: 20
+  });
   const handleChange = (_formData: Record<string, any>) => {
     console.log(_formData);
     setFormData(_formData);
   }
+
   return (
     <div className="conversational-form-demo">
       <ConversationalForm mode="create"

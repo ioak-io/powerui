@@ -5,7 +5,7 @@ import { getClassName } from '../../../utils/ClassNameUtils';
 
 interface DisplayContainerProps {
     children: any;
-    colorMode?: "default" | "primary";
+    colorMode?: "default" | "primary" | "default-2";
     onClick?: () => void;
 }
 

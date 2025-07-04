@@ -6,18 +6,18 @@ import DisplayContainer from './DisplayContainer';
 import { SvgIcon } from 'basicui';
 import { getClassName } from '../../../utils/ClassNameUtils';
 
-interface RenderFieldProps {
+interface BasicProps {
     field: FormFieldSchema;
     formData: any;
     path?: string;
     onChange: (value: any) => void;
-    edit: boolean;
+    edit?: boolean;
 }
 
-const Basic: React.FC<RenderFieldProps> = (props) => {
+const Basic: React.FC<BasicProps> = (props) => {
     const [value, setValue] = useState(getValueAtPath(props.formData, props.field.name));
     const base = 'powerui-renderfield-basic';
-    const [isEdit, setIsEdit] = useState(false);
+    const [isEdit, setIsEdit] = useState(!!props.edit);
 
     const handleChange = (e: any) => {
         setValue(e.currentTarget.value);

@@ -25,3 +25,18 @@ img {
   border: 1px solid var(--powerui-border-color);
   border-radius: var(--powerui-border-radius);
 }
+
+.powerui-flex {
+  display: flex;
+  flex-direction: column;
+}
+.powerui-grid {
+  display: grid;
+  grid-auto-flow: row;
+}
+.powerui-rowgap-1 {
+  row-gap: 6px;
+}
+.powerui-rowgap-2 {
+  row-gap: 12px;
+}

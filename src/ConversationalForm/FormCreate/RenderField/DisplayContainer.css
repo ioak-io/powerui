@@ -3,10 +3,16 @@
     border-radius: 12px;
     padding: 12px 12px;
     background-color: var(--basicui-bg-surface);
-    display: inline-grid;
-    justify-self: flex-start;
+    display: grid;
+    /* justify-self: flex-start; */
     color: var(--basicui-fg);
-  width: fit-content;
+    /* width: fit-content; */
+    text-align: left;
+}
+
+.powerui-displaycontainer--default-2 {
+    background-color: var(--basicui-bg-card);
+    /* border-color: var(--basicui-bg-primary); */
 }
 
 .powerui-displaycontainer--primary {
@@ -20,6 +26,6 @@
 }
 
 button.powerui-displaycontainer {
-    justify-items: flex-start;
+    /* justify-items: flex-start; */
     border: none;
 }

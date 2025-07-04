@@ -11,7 +11,7 @@ interface TextareaProps {
   formData: any;
   path?: string;
   onChange: (value: any) => void;
-  edit: boolean;
+  edit?: boolean;
 }
 
 const Textarea: React.FC<TextareaProps> = (props) => {
