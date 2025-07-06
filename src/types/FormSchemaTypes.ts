@@ -14,7 +14,7 @@ export type FieldType =
     | 'custom';
 
 export interface FieldOption {
-    label: string;
+    name: string;
     value: string | number | boolean;
 }
 

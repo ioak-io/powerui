@@ -1,0 +1,35 @@
+.powerui-cf-arrayfield {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* margin-left: 24px; */
+}
+
+.powerui-cf-arrayfield__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.powerui-cf-arrayfield__actions {
+    display: flex;
+    column-gap: 12px;
+    justify-content: flex-end;
+}
+
+.powerui-cf-arrayfield__fields__delete,
+.powerui-cf-arrayfield__add {
+    justify-content: flex-end;
+    padding: 10px;
+    /* background-color: var(--basicui-bg-primary);
+    color: var(--basicui-fg-primary); */
+    color: var(--basicui-fg);
+    border-radius: 6px;
+    border: 1px solid var(--basicui-bg-primary);
+}
+
+.powerui-cf-arrayfield__fields__delete svg,
+.powerui-cf-arrayfield__add svg {
+    fill: var(--basicui-fg-primary);
+    fill: var(--basicui-fg);
+}

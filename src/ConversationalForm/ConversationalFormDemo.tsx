@@ -33,9 +33,9 @@ const genderField: FormFieldSchema = {
   type: "select",
   label: "Gender",
   options: [
-    { label: "Male", value: "male" },
-    { label: "Female", value: "female" },
-    { label: "Other", value: "other" },
+    { name: "Male", value: "male" },
+    { name: "Female", value: "female" },
+    { name: "Other", value: "other" },
   ],
   conversationalPrompt: "What’s your gender?",
 };
@@ -149,7 +149,10 @@ const fragmentSchema: FormSchema = {
 
 const ConversationalFormDemo = () => {
   const [formData, setFormData] = useState<Record<string, any>>({
-    age: 20
+    age: 20,
+    addresses: [
+      { street: "lorem ipsum" }
+    ]
   });
   const handleChange = (_formData: Record<string, any>) => {
     console.log(_formData);
@@ -158,10 +161,16 @@ const ConversationalFormDemo = () => {
 
   return (
     <div className="conversational-form-demo">
-      <ConversationalForm mode="create"
+      <ConversationalForm
         formData={formData}
         onChange={handleChange}
-        schema={schema} onSubmit={(e) => { console.log(e) }} />
+        schema={schema}
+
+      // mode="create"
+      //   formData={formData}
+      //   onChange={handleChange}
+      //   schema={schema} onSubmit={(e) => { console.log(e) }} 
+      />
     </div>
   );
 };

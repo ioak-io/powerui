@@ -1,0 +1,6 @@
+.powerui-cf-groupfield {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* margin-left: 24px; */
+}

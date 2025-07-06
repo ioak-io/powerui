@@ -1,0 +1,28 @@
+.powerui-cf-textfield__edit {}
+
+.powerui-cf-textfield__edit__reply {
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid var(--basicui-border-color);
+    background-color: var(--basicui-bg-card);
+    color: var(--basicui-fg);
+    gap: 12px;
+}
+
+.powerui-cf-textfield__edit__reply__input {
+    border: none;
+    width: 100%;
+    outline: none;
+    background-color: transparent;
+    color: var(--basicui-fg);
+}
+
+.powerui-cf-textfield__edit__reply__send svg {
+    fill: var(--basicui-bg-primary);
+}
+
+.powerui-cf-textfield__edit__reply__cancel svg {
+    fill: var(--basicui-bg-default);
+}
