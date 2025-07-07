@@ -9,24 +9,27 @@ interface GroupFieldProps {
     fieldPath: string;
     value: any;
     onChange: (val: any) => void;
+    isEven?: boolean;
 }
 
 const BASE_CLASS = "powerui-cf-groupfield"
 
-const GroupField: React.FC<GroupFieldProps> = ({ field, fieldPath, value = {}, onChange }) => {
+const GroupField: React.FC<GroupFieldProps> = (props) => {
     const updateNestedValue = (subPath: string, subVal: any) => {
-        onChange({ ...value, [subPath]: subVal });
+        props.onChange({ ...(props.value || {}), [subPath]: subVal });
     };
 
     return (
-        <div className={getClassName(BASE_CLASS)}>
-            {field.fields?.map((subField) => (
+        <div className={getClassName(BASE_CLASS, [], props.isEven ? ["even"] : [])}>
+            <h6>{prettify(`${props.fieldPath}`)}</h6>
+            {props.field.fields?.map((subField) => (
                 <FieldRenderer
-                    key={`${fieldPath}.${subField.name}`}
+                    key={`${props.fieldPath}.${subField.name}`}
                     field={subField}
-                    fieldPath={`${fieldPath}.${subField.name}`}
-                    value={value?.[subField.name]}
+                    fieldPath={`${props.fieldPath}.${subField.name}`}
+                    value={props.value?.[subField.name]}
                     onChange={(val) => updateNestedValue(subField.name, val)}
+                    isEven={!props.isEven}
                 />
             ))}
         </div>
@@ -34,3 +37,11 @@ const GroupField: React.FC<GroupFieldProps> = ({ field, fieldPath, value = {}, o
 };
 
 export default GroupField;
+
+const prettify = (key: string) => {
+    return key
+        .replace(/\.(\d+)/g, (_, d) => ` #${+d + 1}`)
+        .replace(/\./g, ' > ')
+        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        .replace(/\b\w/g, (l) => l.toUpperCase());
+};

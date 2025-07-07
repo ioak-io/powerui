@@ -3,10 +3,10 @@
 .powerui-cf-textfield__edit__reply {
     display: flex;
     align-items: center;
-    border-radius: 12px;
+    border-radius: 6px;
     padding: 12px;
-    border: 1px solid var(--basicui-border-color);
-    background-color: var(--basicui-bg-card);
+    border: 1px solid var(--powerui-cf-border-color);
+    background-color: var(--powerui-cf-bg-field-input);
     color: var(--basicui-fg);
     gap: 12px;
 }

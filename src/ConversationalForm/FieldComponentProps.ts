@@ -5,4 +5,6 @@ export interface FieldComponentProps {
   fieldPath: string;
   value: any;
   onChange: (val: any) => void;
+  isEven?: boolean;
+  shortPathTitle?: boolean;
 }

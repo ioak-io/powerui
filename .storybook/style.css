@@ -8,11 +8,11 @@ html body * {
 }
 
 .powerui-light {
-    background-color: #f8f9fa;
+    background-color: var(--basicui-bg-base);
 }
 
 .powerui-dark {
-    background-color: #2b2b2b;
+    background-color: var(--basicui-bg-base);
 }
 
 #storybook-root {

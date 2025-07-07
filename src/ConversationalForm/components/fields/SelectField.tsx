@@ -46,7 +46,7 @@ const SelectField: React.FC<FieldComponentProps> = ({
         >
             {!isEdit ? (
                 <>
-                    <span className={getClassName(BASE_CLASS, ["label"])}>{prettify(fieldPath)}: </span>
+                    <span className={getClassName(BASE_CLASS, ["label"])}>{field.label}: </span>
                     <span className={getClassName(BASE_CLASS, ["value"])}>{
                         field.options?.find((opt) => opt.value === value)?.label ||
                         String(value) ||

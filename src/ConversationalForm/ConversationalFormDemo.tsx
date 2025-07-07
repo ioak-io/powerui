@@ -76,6 +76,45 @@ const addressSchema: FormFieldSchema = {
         { label: "UK", value: "uk" },
       ],
       conversationalPrompt: "Which country is this address in?",
+    },
+    {
+      name: "timezone",
+      type: "group",
+      label: "Timezone",
+      fields: [
+
+        {
+          name: "utc",
+          type: "text",
+          label: "UTC value",
+          conversationalPrompt: "What's the value of UTC?",
+        },
+        {
+          name: "format",
+          type: "text",
+          label: "AM/PM",
+          conversationalPrompt: "Do you follow a 24 hour format or 12 hour format?",
+        },
+        {
+          name: "holiday",
+          type: "array",
+          label: "Holiday list",
+          fields: [
+            {
+              name: "name",
+              type: "text",
+              label: "Holiday name",
+              conversationalPrompt: "What is the name of the holiday?",
+            },
+            {
+              name: "halfday",
+              type: "text",
+              label: "Half or full day",
+              conversationalPrompt: "Is it a half day?",
+            }
+          ]
+        }
+      ]
     }
   ]
 }

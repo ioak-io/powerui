@@ -1,14 +1,14 @@
 .powerui-cf-chatbubble {
-  background-color: var(--basicui-bg-card);
+  background-color: var(--powerui-cf-bg-field);
   padding: 1rem 1.25rem;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-  border-left: 4px solid var(--basicui-bg-card);
   transition: background-color 250ms ease-in-out, color 250ms ease-in-out, border-color 250ms ease-in-out;
+  border: 1px dotted var(--powerui-cf-border-color);
+  /* border-left: 4px solid var(--basicui-bg-primary); */
 }
 
 .powerui-cf-chatbubble--editing {
-  border-color: var(--basicui-bg-primary);
+  /* border-color: var(--basicui-bg-primary); */
 }
 .powerui-cf-chatbubble--not-editing {
   justify-content: flex-start;

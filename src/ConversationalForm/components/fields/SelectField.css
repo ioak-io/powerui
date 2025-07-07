@@ -3,10 +3,10 @@
 .powerui-cf-selectfield__edit__reply {
     display: grid;
     grid-template-columns: 1fr auto auto;
-    border-radius: 12px;
-    padding: 12px;
-    border: 1px solid var(--basicui-border-color);
-    background-color: var(--basicui-bg-card);
+    border-radius: 6px;
+    padding: 4px 12px;
+    border: 1px solid var(--powerui-cf-border-color);
+    background-color: var(--powerui-cf-bg-field-input);
     color: var(--basicui-fg);
     gap: 12px;
 }

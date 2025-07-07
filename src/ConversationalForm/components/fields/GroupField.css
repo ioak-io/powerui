@@ -3,4 +3,11 @@
     flex-direction: column;
     gap: 1rem;
     /* margin-left: 24px; */
+    padding: 12px;
+    background-color: var(--powerui-cf-bg-group-odd);
+    border-radius: 12px;
+}
+
+.powerui-cf-groupfield--even {
+    background-color: var(--powerui-cf-bg-group-even);
 }

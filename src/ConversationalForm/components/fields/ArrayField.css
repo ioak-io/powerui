@@ -2,7 +2,14 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    background-color: var(--powerui-cf-bg-group-odd);
+    padding: 12px;
+    border-radius: 12px;
     /* margin-left: 24px; */
+}
+
+.powerui-cf-arrayfield--even {
+    background-color: var(--powerui-cf-bg-group-even);
 }
 
 .powerui-cf-arrayfield__fields {
@@ -11,25 +18,50 @@
     gap: 1rem;
 }
 
+.powerui-cf-arrayfield__fields__header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+}
+
+.powerui-cf-arrayfield__fields__header__title {
+    color: var(--basicui-fg-disabled);
+}
+
+.powerui-cf-arrayfield__fields__header__action__delete,
+.powerui-cf-arrayfield__actions__addaction {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--basicui-bg-danger-muted);
+    font-size: 16px;
+    letter-spacing: 1.5;
+    transition: all 250ms ease-in-out;
+}
+
+.powerui-cf-arrayfield__fields__header__action__delete svg {
+    fill: var(--basicui-bg-danger-muted);
+}
+.powerui-cf-arrayfield__actions__addaction svg {
+    fill: var(--basicui-bg-primary-muted);
+}
+
+.powerui-cf-arrayfield__fields__header__action__delete:hover {
+    color: var(--basicui-bg-danger);
+}
+
+.powerui-cf-arrayfield__fields__header__action__delete:hover svg {
+    fill: var(--basicui-bg-danger);
+}
+
 .powerui-cf-arrayfield__actions {
-    display: flex;
-    column-gap: 12px;
-    justify-content: flex-end;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+}
+.powerui-cf-arrayfield__actions__addaction {
+    color: var(--basicui-bg-primary-muted);
 }
 
-.powerui-cf-arrayfield__fields__delete,
-.powerui-cf-arrayfield__add {
-    justify-content: flex-end;
-    padding: 10px;
-    /* background-color: var(--basicui-bg-primary);
-    color: var(--basicui-fg-primary); */
-    color: var(--basicui-fg);
-    border-radius: 6px;
-    border: 1px solid var(--basicui-bg-primary);
-}
-
-.powerui-cf-arrayfield__fields__delete svg,
-.powerui-cf-arrayfield__add svg {
-    fill: var(--basicui-fg-primary);
-    fill: var(--basicui-fg);
+.powerui-cf-arrayfield__actions__addaction:hover {
+    color: var(--basicui-bg-primary);
 }

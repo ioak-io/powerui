@@ -48,7 +48,6 @@ const ChatBubble: React.FC<ChatBubbleProps> = (props) => {
                 if (
                     props.isEdit && lastActiveBubbleId === instanceId.current
                 ) {
-                    console.log('Escape pressed in this ChatBubble');
                     props.onCancel();
                 }
             }

@@ -5,3 +5,31 @@
     --powerui-border-radius: 2px;
     --powerui-button-border-radius: 4px;
 }
+
+.powerui-cf {
+    --powerui-cf-bg-field: var(--basicui-bg-surface);
+    --powerui-cf-bg-group-odd: var(--basicui-bg-card);
+    --powerui-cf-bg-group-even: var(--basicui-bg-accent);
+}
+.basicui-light .powerui-cf {
+    --powerui-cf-bg-field: #f9fafb;
+    --powerui-cf-bg-field: #f9fafb;
+    --powerui-cf-bg-field-input: #ffffff;
+    --powerui-cf-bg-field-input: #f9fafb;
+    --powerui-cf-bg-group-odd: #f3f4f6;
+    --powerui-cf-bg-group-even: #e5e7eb;
+    --powerui-cf-border-color: var(--basicui-border-color);
+}
+
+.basicui-dark .powerui-cf {
+    /* --powerui-cf-bg-field: #2e2e2e;
+    --powerui-cf-bg-group-odd: #242424;
+    --powerui-cf-bg-group-even: #1c1c1c; */
+
+    --powerui-cf-bg-field:  #1e1e1e;  /* View-only: neutral dark gray */
+    --powerui-cf-bg-field:  #2a2a2a;
+    --powerui-cf-bg-field-input:  #2a2a2a;  /* Editable wrapper: subtly lighter than view */
+    --powerui-cf-bg-group-odd:   #252525;  /* First group background */
+    --powerui-cf-bg-group-even:  #2f2f2f;  /* Alternate nested group background */
+    --powerui-cf-border-color: #3f3f3f;
+}
