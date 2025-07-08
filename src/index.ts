@@ -26,11 +26,13 @@ import HighlightColor from './Toolbar/HighlightColor';
 import SearchBar from './SearchBar';
 import List from './List';
 import ListItem from './List/ListItem';
+import ConversationalForm from './ConversationalForm';
 
 import { SearchBarFilterType } from "./types/SearchBarFilterType";
 
 import * as EditorUtils from './utils/EditorUtils';
 import * as DynamicFormTypes from './types/DynamicFormTypes';
+import * as ConversationalFormTypes from './types/FormSchemaTypes';
 
 export {
     DynamicForm,
@@ -63,6 +65,8 @@ export {
     SearchBar,
     List,
     ListItem,
+    ConversationalForm,
+    ConversationalFormTypes,
 
     type SearchBarFilterType
 }
