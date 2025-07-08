@@ -5,6 +5,7 @@ import { FieldComponentProps } from '../FieldComponentProps';
 import GroupField from './fields/GroupField';
 import ArrayField from './fields/ArrayField';
 import './FieldRenderer.css';
+import TagField from './fields/TagField';
 
 export const BASE_CLASS_FIELD_RENDERER_SHARED = "powerui-cf-fieldrenderer-shared";
 
@@ -19,6 +20,8 @@ const FieldRenderer: React.FC<FieldComponentProps> = (props) => {
         case 'password':
         case 'textarea':
             return <TextField {...props} />;
+        case 'tag':
+            return <TagField {...props} />;
 
         case 'select':
         case 'multiselect':

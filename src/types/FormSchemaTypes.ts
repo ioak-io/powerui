@@ -9,6 +9,7 @@ export type FieldType =
     | 'email'
     | 'phone'
     | 'password'
+    | 'tag'
     | 'group'
     | 'array'
     | 'custom';

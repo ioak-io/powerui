@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import ConversationalForm from '.';
 import { FormFieldSchema, FormSchema } from '../types/FormSchemaTypes';
-import './ConversationalFormDemo.css'
+import './ConversationalFormDemo.css';
 
 const userNameField: FormFieldSchema = {
   name: "fullName",
@@ -13,6 +13,18 @@ const userNameField: FormFieldSchema = {
     minLength: 2,
   },
   conversationalPrompt: "What's your full name?",
+};
+
+const labelField: FormFieldSchema = {
+  name: "labels",
+  type: "tag",
+  label: "Labels",
+  placeholder: "placeholder for labels",
+  validation: {
+    required: true,
+    minLength: 2,
+  },
+  conversationalPrompt: "Tag to labels",
 };
 
 const ageField: FormFieldSchema = {
@@ -162,7 +174,7 @@ const productSchema: FormFieldSchema = {
 
 const schema: FormSchema = {
   fields: [
-    genderField, productSchema, contentSchema, addressSchema, ageField, userNameField
+    genderField, labelField, productSchema, contentSchema, addressSchema, ageField, userNameField
   ]
 }
 
@@ -191,6 +203,19 @@ const ConversationalFormDemo = () => {
     age: 20,
     addresses: [
       { street: "lorem ipsum" }
+    ],
+    labels: [
+      {
+        label: "lorem",
+        id: "1",
+      },
+      {
+        label: "ipsum",
+        id: 2,
+      },
+      {
+        label: "dolor"
+      }
     ]
   });
   const handleChange = (_formData: Record<string, any>) => {

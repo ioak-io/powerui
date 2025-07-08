@@ -52,7 +52,7 @@ const TextField: React.FC<FieldComponentProps> = ({
                             type="text"
                             value={localValue}
                             placeholder={field.placeholder}
-                            className={getClassName(BASE_CLASS, ["edit", "reply", "input"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["reply"]))}
+                            className={getClassName(BASE_CLASS, ["edit", "reply", "input"], [])}
                             onChange={(e) => setLocalValue(e.target.value)}
                         />
                         <button className={getClassName(BASE_CLASS, ["edit", "reply", "cancel"], [], "basicui-clean-button")} onClick={handleCancel} aria-label="Cancel">
