@@ -1,13 +1,42 @@
 .powerui-cf-groupfield {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    /* margin-left: 24px; */
     padding: 12px;
     background-color: var(--powerui-cf-bg-group-odd);
     border-radius: 12px;
 }
 
+.powerui-cf-groupfield__main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .powerui-cf-groupfield--even {
     background-color: var(--powerui-cf-bg-group-even);
+}
+.powerui-cf-groupfield__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding-bottom: 12px; */
+}
+
+.powerui-cf-groupfield__header h6 {
+    margin: 0;
+}
+
+.powerui-cf-groupfield__main {
+    overflow: hidden;
+    margin-top: 12px;
+}
+
+.powerui-cf-groupfield__main--expanded {
+    visibility: visible;
+}
+
+.powerui-cf-groupfield__main--collapsed {
+    max-height: 0;
+    pointer-events: none;
+    margin-top: 0;
 }

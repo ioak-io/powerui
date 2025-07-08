@@ -1,7 +1,7 @@
 .powerui-cf-arrayfield {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    /* gap: 1rem; */
     background-color: var(--powerui-cf-bg-group-odd);
     padding: 12px;
     border-radius: 12px;
@@ -12,7 +12,17 @@
     background-color: var(--powerui-cf-bg-group-even);
 }
 
-.powerui-cf-arrayfield__fields {
+.powerui-cf-arrayfield__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.powerui-cf-arrayfield__header h6 {
+    margin: 0;
+}
+
+.powerui-cf-arrayfield__fields__items {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -22,6 +32,7 @@
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
+    padding: 24px 0 6px 0;
 }
 
 .powerui-cf-arrayfield__fields__header__title {
@@ -33,7 +44,7 @@
     font-weight: bold;
     text-transform: uppercase;
     color: var(--basicui-bg-danger-muted);
-    font-size: 16px;
+    font-size: 12px;
     letter-spacing: 1.5;
     transition: all 250ms ease-in-out;
 }
@@ -41,6 +52,7 @@
 .powerui-cf-arrayfield__fields__header__action__delete svg {
     fill: var(--basicui-bg-danger-muted);
 }
+
 .powerui-cf-arrayfield__actions__addaction svg {
     fill: var(--basicui-bg-primary-muted);
 }
@@ -57,11 +69,26 @@
     display: grid;
     grid-auto-flow: column;
     justify-content: space-between;
+    padding: 24px 0 0px 0;
 }
+
 .powerui-cf-arrayfield__actions__addaction {
     color: var(--basicui-bg-primary-muted);
 }
 
 .powerui-cf-arrayfield__actions__addaction:hover {
     color: var(--basicui-bg-primary);
+}
+
+.powerui-cf-arrayfield__main {
+    overflow: hidden;
+}
+
+.powerui-cf-arrayfield__main--expanded {
+    visibility: visible;
+}
+
+.powerui-cf-arrayfield__main--collapsed {
+    max-height: 0;
+    pointer-events: none;
 }

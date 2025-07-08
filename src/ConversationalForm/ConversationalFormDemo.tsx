@@ -98,7 +98,7 @@ const addressSchema: FormFieldSchema = {
         {
           name: "holiday",
           type: "array",
-          label: "Holiday list",
+          label: "Holiday",
           fields: [
             {
               name: "name",
