@@ -1,7 +1,6 @@
 // ConversationalForm.stories.tsx
 import { Meta, StoryObj } from '@storybook/react';
 import ConversationalFormDemo from './ConversationalFormDemo';
-import { ConversationalFormProps } from '.';
 
 const meta: Meta<typeof ConversationalFormDemo> = {
   title: 'Conversational Form',
@@ -14,5 +13,5 @@ export default meta;
 type Story = StoryObj<typeof ConversationalFormDemo>;
 
 export const Demo: Story = {
-  args: {} as ConversationalFormProps
+  args: {}
 };

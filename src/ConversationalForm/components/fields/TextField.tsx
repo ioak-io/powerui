@@ -37,7 +37,7 @@ const TextField: React.FC<FieldComponentProps> = ({
                 <>
                     {/* <span className={getClassName(BASE_CLASS, ["label"])}>{prettify(fieldPath)}: </span> */}
                     <span className={getClassName(BASE_CLASS, ["label"])}>{field.label}: </span>
-                    <span className={getClassName(BASE_CLASS, ["value"])}>{value || '—'}</span>
+                    <span className={getClassName(BASE_CLASS, ["value"])}>{value || ''}</span>
                 </>
             ) : (
                 <div className={getClassName(BASE_CLASS, ["edit"])}>

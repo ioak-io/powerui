@@ -58,7 +58,6 @@ const List = (props: ListProps) => {
                     onClick={props.onClick ? () => handleItemClick(props.data[index].id) : undefined}
                     onSelect={props.onSelect}
                     showSelectOnRight={props.showSelectOnRight}
-                    showCollapse={props.showCollapse}
                     specDefinition={props.specDefinition}
                 >
                     {child}
@@ -104,7 +103,6 @@ const List = (props: ListProps) => {
                             onClick={() => handleItemClick(item.id)}
                             onSelect={props.onSelect}
                             showSelectOnRight={props.showSelectOnRight}
-                            showCollapse={props.showCollapse}
                             specDefinition={props.specDefinition}
                         />
                     ))}

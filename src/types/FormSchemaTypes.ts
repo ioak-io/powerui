@@ -1,3 +1,5 @@
+import { OptionsObjectType } from "basicui";
+
 export type FieldType =
     | 'text'
     | 'textarea'
@@ -37,8 +39,9 @@ export interface FormFieldSchema {
     description?: string;
     placeholder?: string;
     defaultValue?: any;
-    options?: FieldOption[];
+    options?: OptionsObjectType[];
     validation?: FieldValidation;
+    multiple?: boolean;
 
     visibleIf?: {
         referenceField: string,

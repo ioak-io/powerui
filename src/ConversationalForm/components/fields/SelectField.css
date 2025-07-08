@@ -30,3 +30,7 @@
 .powerui-cf-selectfield__edit__reply__cancel svg {
     fill: var(--basicui-bg-default);
 }
+
+.powerui-cf-selectfield__label {
+    /* color: var(--basicui-fg-disabled); */
+}

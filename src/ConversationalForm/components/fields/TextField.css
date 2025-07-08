@@ -26,3 +26,7 @@
 .powerui-cf-textfield__edit__reply__cancel svg {
     fill: var(--basicui-bg-default);
 }
+
+.powerui-cf-textfield__label {
+    /* color: var(--basicui-fg-disabled); */
+}

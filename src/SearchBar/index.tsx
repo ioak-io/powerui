@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {Input, SvgIcon, Button, SearchBarFilterType, ButtonVariantType} from 'basicui';
+import {Input, SvgIcon, Button, ButtonVariantType} from 'basicui';
 import FilterSection from "./FilterSection";
+import { SearchBarFilterType } from "../types/SearchBarFilterType";
 
 type SearchPayload = {
     searchText: string;

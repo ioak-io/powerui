@@ -63,8 +63,6 @@
     fill: var(--basicui-bg-primary);
 }
 
-.powerui-cf-tagfield__read {}
-
-.powerui-cf-tagfield__read__label {}
-
-.powerui-cf-tagfield__read__value {}
+.powerui-cf-tagfield__read__label {
+    /* color: var(--basicui-fg-disabled); */
+}

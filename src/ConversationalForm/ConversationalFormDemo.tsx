@@ -45,9 +45,9 @@ const genderField: FormFieldSchema = {
   type: "select",
   label: "Gender",
   options: [
-    { name: "Male", value: "male" },
-    { name: "Female", value: "female" },
-    { name: "Other", value: "other" },
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+    { label: "Other", value: "other" },
   ],
   conversationalPrompt: "What’s your gender?",
 };
@@ -82,8 +82,11 @@ const addressSchema: FormFieldSchema = {
       name: "country",
       type: "select",
       label: "Country",
+      multiple: true,
       options: [
         { label: "USA", value: "us" },
+        { label: "Canada", value: "ca" },
+        { label: "UK", value: "uk" },
         { label: "Canada", value: "ca" },
         { label: "UK", value: "uk" },
       ],
