@@ -1,3 +1,8 @@
+.powerui-cf-textfield__value {
+    text-wrap: auto;
+    text-align: left;
+}
+
 .powerui-cf-textfield__edit {}
 
 .powerui-cf-textfield__edit__reply {
@@ -28,5 +33,5 @@
 }
 
 .powerui-cf-textfield__label {
-    /* color: var(--basicui-fg-disabled); */
+    color: var(--basicui-fg-disabled);
 }

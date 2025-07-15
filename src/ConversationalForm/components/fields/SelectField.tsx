@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FieldComponentProps } from '../../FieldComponentProps';
 import ChatBubble from '../chat/ChatBubble';
 import { getClassName } from '../../../utils/ClassNameUtils';
@@ -15,7 +15,11 @@ const SelectField: React.FC<FieldComponentProps> = ({
     onChange
 }) => {
     const [isEdit, setIsEdit] = useState(false);
-    const [localValue, setLocalValue] = useState<string[]>(Array.isArray(value) ? value : []);
+    const [localValue, setLocalValue] = useState<string[]>([]);
+
+    useEffect(() => {
+        setLocalValue(Array.isArray(value) ? value : []);
+    }, [value])
 
     const handleSubmit = () => {
         onChange(localValue);
@@ -39,12 +43,12 @@ const SelectField: React.FC<FieldComponentProps> = ({
         >
             {!isEdit ? (
                 <>
-                    <span className={getClassName(BASE_CLASS, ["label"])}>{field.label}: </span>
-                    <span className={getClassName(BASE_CLASS, ["value"])}>
-                        {(Array.isArray(value) ? value : []).map((val) =>
+                    <span className={getClassName(BASE_CLASS, ["label"])}>{field.label}</span>
+                    {Array.isArray(value) && value.length > 0 && <span className={getClassName(BASE_CLASS, ["value"])}>
+                        {value.map((val) =>
                             field.options?.find((opt) => opt.value === val)?.label || val
                         ).join(', ') || ''}
-                    </span>
+                    </span>}
                 </>
             ) : (
                 <div className={getClassName(BASE_CLASS, ["edit"])}>

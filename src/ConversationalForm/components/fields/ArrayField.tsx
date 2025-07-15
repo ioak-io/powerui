@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormFieldSchema } from '../../../types/FormSchemaTypes';
+import { FormFieldSchema } from '../../../types/uispec.types';
 import FieldRenderer from '../FieldRenderer';
 import './ArrayField.css';
 import { getClassName } from '../../../utils/ClassNameUtils';

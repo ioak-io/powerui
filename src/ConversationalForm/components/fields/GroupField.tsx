@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormFieldSchema } from '../../../types/FormSchemaTypes';
+import { FormFieldSchema } from '../../../types/uispec.types';
 import FieldRenderer from '../FieldRenderer';
 import { getClassName } from '../../../utils/ClassNameUtils';
 import './GroupField.css';

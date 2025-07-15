@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import ConversationalForm from '.';
-import { FormFieldSchema, FormSchema } from '../types/FormSchemaTypes';
+import { FormFieldSchema, FormSchema } from '../types/uispec.types';
 import './ConversationalFormDemo.css';
 
 const userNameField: FormFieldSchema = {
@@ -209,15 +209,15 @@ const ConversationalFormDemo = () => {
     ],
     labels: [
       {
-        label: "lorem",
+        value: "lorem",
         id: "1",
       },
       {
-        label: "ipsum",
+        value: "ipsum",
         id: 2,
       },
       {
-        label: "dolor"
+        value: "dolor"
       }
     ]
   });
@@ -232,6 +232,9 @@ const ConversationalFormDemo = () => {
         formData={formData}
         onChange={handleChange}
         schema={schema}
+        onSubmit={() => { }}
+        onCancel={() => { }}
+        onReset={() => { }}
 
       // mode="create"
       //   formData={formData}

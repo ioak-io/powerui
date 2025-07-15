@@ -1,5 +1,4 @@
 import Toolbar from "./Toolbar";
-import DynamicForm from "./DynamicForm";
 import Editor from "./Editor";
 import Bold from "./Toolbar/Bold";
 import Italic from "./Toolbar/Italic";
@@ -31,12 +30,9 @@ import ConversationalForm from './ConversationalForm';
 import { SearchBarFilterType } from "./types/SearchBarFilterType";
 
 import * as EditorUtils from './utils/EditorUtils';
-import * as DynamicFormTypes from './types/DynamicFormTypes';
-import * as ConversationalFormTypes from './types/FormSchemaTypes';
+import * as ConversationalFormTypes from './types/uispec.types';
 
 export {
-    DynamicForm,
-    DynamicFormTypes,
     Editor,
     Toolbar,
     Bold,

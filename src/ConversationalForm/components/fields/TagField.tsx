@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FieldComponentProps } from '../../FieldComponentProps';
 import ChatBubble from '../chat/ChatBubble';
 import { getClassName } from '../../../utils/ClassNameUtils';
@@ -15,9 +15,13 @@ const TagField: React.FC<FieldComponentProps> = ({
     onChange,
 }) => {
     const [isEdit, setIsEdit] = useState(false);
-    const [tags, setTags] = useState<{ id?: string; label: string }[]>(
+    const [localValue, setLocalValue] = useState<{ id?: string; value: string }[]>(
         Array.isArray(value) ? value : []
     );
+
+    useEffect(() => {
+        setLocalValue(value || '');
+    }, [value])
 
     const [inputValue, setInputValue] = useState('');
 
@@ -25,27 +29,27 @@ const TagField: React.FC<FieldComponentProps> = ({
         const entries = inputValue
             .split(',')
             .map(label => label.trim())
-            .filter(label => label && !tags.some(tag => tag.label === label));
+            .filter(label => label && !localValue.some(tag => tag.value === label));
 
         if (entries.length) {
-            const newTags = entries.map(label => ({ label }));
-            setTags([...tags, ...newTags]);
+            const newTags = entries.map(value => ({ value }));
+            setLocalValue([...localValue, ...newTags]);
             setInputValue('');
         }
     };
 
 
     const handleRemoveTag = (tagToRemove: string) => {
-        setTags(tags.filter(tag => tag.label !== tagToRemove));
+        setLocalValue(localValue.filter(tag => tag.value !== tagToRemove));
     };
 
     const handleSubmit = () => {
-        onChange(tags);
+        onChange(localValue);
         setIsEdit(false);
     };
 
     const handleCancel = () => {
-        setTags(Array.isArray(value) ? value : []);
+        setLocalValue(Array.isArray(value) ? value : []);
         setInputValue('');
         setIsEdit(false);
     };
@@ -64,14 +68,14 @@ const TagField: React.FC<FieldComponentProps> = ({
             onCancel={handleCancel}
         >
             {!isEdit ? (
-                <div className={getClassName(BASE_CLASS, ['read'])}>
-                    <span className={getClassName(BASE_CLASS, ['read', 'label'])}>{field.label}: </span>
-                    <div className={getClassName(BASE_CLASS, ['read', 'tags'])}>
-                        {tags.length > 0 ? tags.map((tag, idx) => (
-                            <span key={idx} className={getClassName(BASE_CLASS, ['read', 'tags', "tag"])}>{tag.label}</span>
-                        )) : ''}
-                    </div>
-                </div>
+                <>
+                    <div className={getClassName(BASE_CLASS, ['read', 'label'])}>{field.label}</div>
+                    {localValue.length > 0 && <div className={getClassName(BASE_CLASS, ['read', 'tags'])}>
+                        {localValue.map((tag, idx) => (
+                            <span key={idx} className={getClassName(BASE_CLASS, ['read', 'tags', "tag"])}>{tag.value}</span>
+                        ))}
+                    </div>}
+                </>
             ) : (
                 <div className={getClassName(BASE_CLASS, ['edit'])}>
                     <div className={getClassName(BASE_CLASS, ['edit', 'prompt'], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ['prompt']))}>
@@ -88,10 +92,10 @@ const TagField: React.FC<FieldComponentProps> = ({
                                 className={getClassName(BASE_CLASS, ['edit', 'reply', "tags", "input"], [])}
                                 autoFocus
                             />
-                            {tags.map((tag, index) => (
+                            {localValue.map((tag, index) => (
                                 <span className={getClassName(BASE_CLASS, ['edit', 'reply', "tags", "tag"], [])} key={index}>
-                                    {tag.label}
-                                    <span className={getClassName(BASE_CLASS, ['edit', 'reply', "tags", "tag", "delete"], [])} onClick={() => handleRemoveTag(tag.label)}>×</span>
+                                    {tag.value}
+                                    <span className={getClassName(BASE_CLASS, ['edit', 'reply', "tags", "tag", "delete"], [])} onClick={() => handleRemoveTag(tag.value)}>×</span>
                                 </span>
                             ))}
                         </div>

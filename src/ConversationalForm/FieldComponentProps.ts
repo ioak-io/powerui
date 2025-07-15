@@ -1,4 +1,4 @@
-import { FormFieldSchema } from "../types/FormSchemaTypes";
+import { FormFieldSchema } from "../types/uispec.types";
  
 export interface FieldComponentProps {
   field: FormFieldSchema;

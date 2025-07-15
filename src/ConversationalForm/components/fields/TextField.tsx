@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FieldComponentProps } from '../../FieldComponentProps';
 import ChatBubble from '../chat/ChatBubble';
 import { getClassName } from '../../../utils/ClassNameUtils';
 import { BASE_CLASS_FIELD_RENDERER_SHARED } from '../FieldRenderer';
 import './TextField.css';
 import { SvgIcon } from 'basicui';
+import { isEmptyOrSpaces } from '../../../utils/Utils';
 
 const BASE_CLASS = "powerui-cf-textfield";
 
@@ -15,7 +16,11 @@ const TextField: React.FC<FieldComponentProps> = ({
     onChange,
 }) => {
     const [isEdit, setIsEdit] = useState(false);
-    const [localValue, setLocalValue] = useState(value || '');
+    const [localValue, setLocalValue] = useState('');
+
+    useEffect(() => {
+        setLocalValue(value || '');
+    }, [value])
 
     const handleSubmit = () => {
         onChange(localValue);
@@ -36,8 +41,8 @@ const TextField: React.FC<FieldComponentProps> = ({
             {!isEdit ? (
                 <>
                     {/* <span className={getClassName(BASE_CLASS, ["label"])}>{prettify(fieldPath)}: </span> */}
-                    <span className={getClassName(BASE_CLASS, ["label"])}>{field.label}: </span>
-                    <span className={getClassName(BASE_CLASS, ["value"])}>{value || ''}</span>
+                    <span className={getClassName(BASE_CLASS, ["label"])}>{field.label} </span>
+                    {!isEmptyOrSpaces(value) && <span className={getClassName(BASE_CLASS, ["value"])}>{value}</span>}
                 </>
             ) : (
                 <div className={getClassName(BASE_CLASS, ["edit"])}>

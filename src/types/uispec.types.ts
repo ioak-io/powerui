@@ -1,5 +1,3 @@
-import { OptionsObjectType } from "basicui";
-
 export type FieldType =
     | 'text'
     | 'textarea'
@@ -39,7 +37,7 @@ export interface FormFieldSchema {
     description?: string;
     placeholder?: string;
     defaultValue?: any;
-    options?: OptionsObjectType[];
+    options?: { label: string, value: string | number }[];
     validation?: FieldValidation;
     multiple?: boolean;
 
@@ -56,6 +54,27 @@ export interface FormFieldSchema {
     fields?: FormFieldSchema[];
 }
 
+export interface FormAction {
+    label: string;
+    type: "edit" | "delete" | "generate" | "custom";
+
+    generation?: {
+        id: string;
+        inputFields?: FormFieldSchema[];
+        confirmPrompt?: {
+            title?: string;
+            message?: string;
+            confirmLabel?: string;
+            cancelLabel?: string;
+        };
+    };
+}
+
 export interface FormSchema {
+    header?: {
+        title?: { type: "static" | "dynamic", field?: string, value?: string };
+        subtitle?: { type: "static" | "dynamic", field?: string, value?: string };
+        actions?: FormAction[];
+    };
     fields: FormFieldSchema[];
 }

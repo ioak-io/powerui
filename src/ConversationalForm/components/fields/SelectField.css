@@ -32,5 +32,5 @@
 }
 
 .powerui-cf-selectfield__label {
-    /* color: var(--basicui-fg-disabled); */
+    color: var(--basicui-fg-disabled);
 }

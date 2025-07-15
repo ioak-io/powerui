@@ -64,5 +64,5 @@
 }
 
 .powerui-cf-tagfield__read__label {
-    /* color: var(--basicui-fg-disabled); */
+    color: var(--basicui-fg-disabled);
 }
