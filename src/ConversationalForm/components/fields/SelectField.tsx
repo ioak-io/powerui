@@ -15,10 +15,11 @@ const SelectField: React.FC<FieldComponentProps> = ({
     onChange
 }) => {
     const [isEdit, setIsEdit] = useState(false);
-    const [localValue, setLocalValue] = useState<string[]>([]);
+    const [localValue, setLocalValue] = useState<string>("");
+    const [localValues, setLocalValues] = useState<string[]>([]);
 
     useEffect(() => {
-        setLocalValue(Array.isArray(value) ? value : []);
+        handleCancel();
     }, [value])
 
     const handleSubmit = () => {
@@ -27,11 +28,19 @@ const SelectField: React.FC<FieldComponentProps> = ({
     };
 
     const handleChange = (e: any) => {
-        setLocalValue(e.currentTarget.values || []);
+        if (field.multiple) {
+            setLocalValues(e.currentTarget.values || []);
+        } else {
+            setLocalValue(e.currentTarget.value);
+        }
     };
 
     const handleCancel = () => {
-        setLocalValue(Array.isArray(value) ? value : []);
+        if (field.multiple) {
+            setLocalValues(Array.isArray(value) ? value : []);
+        } else {
+            setLocalValue(value)
+        }
         setIsEdit(false);
     };
 
@@ -56,13 +65,19 @@ const SelectField: React.FC<FieldComponentProps> = ({
                         {field.conversationalPrompt || `Select ${prettify(fieldPath)}:`}
                     </div>
                     <div className={getClassName(BASE_CLASS, ["edit", "reply"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["reply"]))} onClick={(e) => e.stopPropagation()}>
-                        <Select
-                            multiple={field.multiple}
+                        {field.multiple && <Select
+                            multiple
                             autocomplete={field.options && field.options?.length > 4}
-                            value={localValue}
+                            value={localValues}
                             options={field.options || []}
                             onChange={handleChange}
-                        />
+                        />}
+                        {!field.multiple && <Select
+                            autocomplete={field.options && field.options?.length > 4}
+                            value={[localValue]}
+                            options={field.options || []}
+                            onChange={handleChange}
+                        />}
                         <button className={getClassName(BASE_CLASS, ["edit", "reply", "cancel"], [], "basicui-clean-button")} onClick={handleCancel} aria-label="Cancel">
                             <SvgIcon height="16px" width="16px">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path d="M242.7 256L345.6 153.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L197.3 210.7 94.6 108.1c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L152.7 256 49.4 359.6c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L197.3 301.3l102.7 102.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L242.7 256z" /></svg>
