@@ -1,0 +1,68 @@
+.powerui-cf-tagfield__read {
+    display: flex;
+}
+
+.powerui-cf-tagfield__read__label {
+    line-height: 2;
+}
+.powerui-cf-tagfield__read__tags,
+.powerui-cf-tagfield__edit__reply__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.powerui-cf-tagfield__edit__reply__tags__tag,
+.powerui-cf-tagfield__read__tags__tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--basicui-bg-accent);
+    border-radius: 24px;
+    padding: 2px 10px;
+    font-size: 0.85rem;
+}
+
+.powerui-cf-tagfield__edit__reply__tags__tag__delete {
+    margin-left: 6px;
+    cursor: pointer;
+    color: var(--basicui-fg-disabled);
+}
+
+.powerui-cf-tagfield__edit .tag-input-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    min-height: 40px;
+    padding: 4px 0;
+}
+
+.powerui-cf-tagfield__edit__reply__tags__input {
+    border: none;
+    width: 100%;
+    outline: none;
+    background-color: transparent;
+    color: var(--basicui-fg);
+    border-radius: 6px;
+    border: 1px solid var(--powerui-cf-border-color);
+    padding: 12px;
+}
+
+.powerui-cf-tagfield__edit__reply__tags__actions {
+    display: flex;
+    column-gap: 12px;
+    justify-content: flex-end;
+    padding-top: 12px;
+}
+
+.powerui-cf-tagfield__edit__reply__tags__actions__cancel svg {
+    fill: var(--basicui-bg-default);
+}
+
+
+.powerui-cf-tagfield__edit__reply__tags__actions__send svg {
+    fill: var(--basicui-bg-primary);
+}
+
+.powerui-cf-tagfield__read__label {
+    color: var(--basicui-fg-disabled);
+}

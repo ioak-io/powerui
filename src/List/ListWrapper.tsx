@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import List, { ListItemType, ListProps } from ".";
 import ListItem from "./ListItem";
 
 /**
@@ -7,87 +6,35 @@ import ListItem from "./ListItem";
  */
 
 import { customAlphabet } from 'nanoid';
-import { SpecDefinition } from "../types/DynamicFormTypes";
+import { ListSchema } from "../types/uispec.types";
+import List from ".";
 
 const alphanumericAlphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 const nanoid = customAlphabet(alphanumericAlphabet, 8);
 
-export const fragmentSpec: SpecDefinition = {
-    "displayOptions": {
-        "list": {
-            "header": {
-                "title": "Fragment list",
-                "subtitle": "List of fragments in the system"
-            },
-            "fields": [
-                {
-                    "key": "name",
-                    "format": "title"
-                },
-                {
-                    "key": "content",
-                    "format": "summary"
-                }
-            ]
-        },
-        "item": {
-            "header": {
-                "title": "View a selected fragment",
-                "subtitle": "Lorem ipsum dolor sit"
-            }
-        }
+export const listSchema: ListSchema = {
+    "header": {
+        title: { type: "static", value: "List renderer" },
+        subtitle: { type: "static", value: "Lorem ipsum dolor sit...." }
     },
-    "fields": {
-        "name": {
-            "type": "string",
-            "required": true,
-            "displayOptions": {
-                "type": "h2"
-            }
+    "fields": [
+        {
+            name: "name",
+            type: "text",
+            label: "Name"
         },
-        "content": {
-            "type": "string",
-            "required": false,
-            "displayOptions": {
-                "type": "textarea"
-            }
+        {
+            name: "content",
+            type: "textarea",
+            label: "Content"
         },
-        "labels": {
-            "type": "array",
-            "required": false,
-            "itemType": "string",
-            "parent": {
-                "domain": "fragmentLabel",
-                "field": "reference"
-            },
-            "displayOptions": {
-                "type": "autocomplete",
-                "label": "Labels"
-            }
+        {
+            name: "labels",
+            type: "tag",
+            label: "Tags"
         }
-    },
-    "meta": {
-        "hooks": {},
-        "children": [
-            {
-                "domain": "fragmentVersion",
-                "field": {
-                    "parent": "reference",
-                    "child": "fragmentReference"
-                },
-                "cascadeDelete": true
-            },
-            {
-                "domain": "fragmentInsight",
-                "field": {
-                    "parent": "reference",
-                    "child": "fragmentReference"
-                },
-                "cascadeDelete": true
-            }
-        ]
-    }
-};
+    ]
+}
 
 const EXAMPLE_DATA: any[] = [
     {
@@ -99,8 +46,11 @@ const EXAMPLE_DATA: any[] = [
         "updatedAt": "2025-04-24T11:23:53.258Z",
         "name": "Into the water puddle",
         "content": "<p>all new changesbgfh</p>",
-        "labels": [
-            "aCwRYuw8"
+        "labels": [{
+            id: "aCwRYuw8", value: "lorem"
+        }, {
+            id: "aCwRYuw9", value: "dolor"
+        }
         ]
     },
     {
@@ -160,7 +110,7 @@ const EXAMPLE_DATA: any[] = [
     }
 ];
 
-const EXAMPLE_DATA_OWN_CHILDREN_RENDER: ListItemType[] = [
+const EXAMPLE_DATA_OWN_CHILDREN_RENDER: Record<string, any>[] = [
     {
         "id": "11",
         "category": "Thriller",
@@ -294,46 +244,22 @@ const ListWrapper = (props: {
         });
     }
 
-    useEffect(() => {
-        if (props.renderFromChildren) {
-            setSelectedItems(prev =>
-                prev.filter(id => EXAMPLE_DATA_OWN_CHILDREN_RENDER.some(item => item.id === id))
-            );
-        } else {
-            setSelectedItems(prev =>
-                prev.filter(id => EXAMPLE_DATA.some(item => item.id === id))
-            );
-        }
-    }, [props.renderFromChildren]);
-
-    useEffect(() => {
-        console.log(selectedItems)
-    }, [selectedItems])
-
-    useEffect(() => {
-        setChildrenELements(
-            EXAMPLE_DATA_OWN_CHILDREN_RENDER.map(item => (
-                <ListItem
-                    key={item.id}
-                >
-                    {item.title} - {item.summary}
-                </ListItem>
-            )) || [])
-    }, [])
+    const [checkedItems, setCheckedItems] = useState<string[]>([]);
 
     return (
         <div style={{ padding: "24px" }}>
             <List
-                specDefinition={fragmentSpec}
-                data={props.renderFromChildren ? EXAMPLE_DATA_OWN_CHILDREN_RENDER : EXAMPLE_DATA}
-                onClick={handleClick}
-                selectedItems={selectedItems}
-                onSelect={handleSelect}
-                showSelectOnRight={props.showSelectOnRight}
-                showCollapse={props.showCollapse}
-            >
-                {props.renderFromChildren && childrenELements}
-            </List>
+                listSchema={listSchema}
+                data={EXAMPLE_DATA}
+                checkedItems={checkedItems}
+                setCheckedItems={setCheckedItems}
+
+            // onClick={handleClick}
+            // selectedItems={selectedItems}
+            // onSelect={handleSelect}
+            // showSelectOnRight={props.showSelectOnRight}
+            // showCollapse={props.showCollapse}
+            />
         </div>
     );
 };

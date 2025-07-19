@@ -1,17 +1,16 @@
 import { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from "react";
-import List, { ListProps } from '.';
 import ListWrapper from './ListWrapper';
 
-const meta: Meta<typeof List> = {
+const meta: Meta<typeof ListWrapper> = {
   title: "Composite/List",
-  component: List,
+  component: ListWrapper,
   argTypes: {
   },
 } as Meta;
 
 export default meta;
-type Story = StoryObj<typeof List>;
+type Story = StoryObj<typeof ListWrapper>;
 
 
 const Template: Story = {

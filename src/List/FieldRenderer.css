@@ -1,0 +1,15 @@
+.powerui-field-renderer {
+    margin-right: 16px;
+    display: inline-block;
+}
+
+.powerui-field-renderer--text {
+    font-weight: normal;
+}
+
+.powerui-field-renderer--boolean {
+    font-style: italic;
+}
+
+.powerui-field-renderer--select {
+}

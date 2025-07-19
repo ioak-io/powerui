@@ -78,4 +78,18 @@ export interface FormSchema {
         actions?: FormAction[];
     };
     fields: FormFieldSchema[];
+    children?: {
+        domain: string;
+        field: { parent: string; child: string };
+        listSchema: ListSchema;
+    }[]
+}
+
+export interface ListSchema {
+    header?: {
+        title?: { type: "static" | "dynamic", field?: string, value?: string };
+        subtitle?: { type: "static" | "dynamic", field?: string, value?: string };
+        actions?: FormAction[];
+    };
+    fields: FormFieldSchema[];
 }
