@@ -3,3 +3,17 @@
     row-gap: 12px;
     flex-direction: column;
 }
+
+
+.powerui-list__actionheader {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.powerui-list__actionheader__actions {
+    display: flex;
+    flex-direction: row;
+    column-gap: 12px;
+}

@@ -19,7 +19,7 @@ interface ListItemProps {
 const ListItem: React.FC<ListItemProps> = (props) => {
 
     const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-        props.onCheck?.(e.target.checked);
+        props.onCheck?.(!props.isChecked);
     };
 
     const getValueAtPath = (path: string) => {
