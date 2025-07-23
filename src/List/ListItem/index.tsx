@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-import './ListItem.css';
-import { ListSchema } from '../types/uispec.types';
-import FieldRenderer from './FieldRenderer';
+import './style.css';
+import { ListSchema } from '../../types/uispec.types';
+import FieldRenderer from '../FieldRenderer';
 import { Checkbox } from 'basicui';
-import { getClassName } from '../utils/ClassNameUtils';
+import { getClassName } from '../../utils/ClassNameUtils';
+import ActionBar from './ActionBar';
 
 const BASE_CLASS = 'powerui-list-item';
 
@@ -18,17 +19,13 @@ interface ListItemProps {
 
 const ListItem: React.FC<ListItemProps> = (props) => {
 
-    const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-        props.onCheck?.(!props.isChecked);
-    };
-
     const getValueAtPath = (path: string) => {
         return path.split('.').reduce((acc, key) => acc?.[key], props.data);
     };
 
     return (
-        <div className={BASE_CLASS}>
-            <Checkbox checked={props.isChecked} onInput={handleCheck} name={props.data["reference"]} />
+        <div className={getClassName(BASE_CLASS, [], props.isChecked ? ["checked"] : [])}>
+            <ActionBar isChecked={props.isChecked} schema={props.schema} onCheck={props.onCheck} />
             <button className={getClassName(BASE_CLASS, ["main"], [], "basicui-clean-button")} onClick={props.onClick}>
                 {props.schema.fields.map((field) => (
                     <FieldRenderer

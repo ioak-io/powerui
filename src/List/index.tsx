@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
-import ListItem from './ListItem';
 
 import './style.css';
 import { ListSchema } from '../types/uispec.types';
 import { getClassName } from '../utils/ClassNameUtils';
+import ListItem from './ListItem';
 
 const BASE_CLASS = 'powerui-list';
 
@@ -13,12 +13,11 @@ interface ListProps {
     actions?: { noneSelect: ReactNode[], singleSelect: ReactNode[], multiSelect: ReactNode[] };
     checkedItems: string[];
     setCheckedItems?: (items: string[]) => void;
-    onItemClick?: (item: Record<string, any>) => void;
+    onItemClick?: (itemReference: string) => void;
 }
 
 const List: React.FC<ListProps> = (props) => {
     const handleCheck = (reference: string, checked: boolean) => {
-        console.log(reference, checked)
         if (!props.setCheckedItems) return;
 
         if (checked) {
@@ -50,8 +49,10 @@ const List: React.FC<ListProps> = (props) => {
                     data={entry}
                     schema={props.listSchema}
                     isChecked={props.checkedItems?.includes(entry.reference)}
-                    onClick={() => props.onItemClick?.(entry)}
-                    onCheck={(checked) => handleCheck(entry.reference, checked)}
+                    onClick={() => props.onItemClick?.(entry.reference)}
+                    {...(props.setCheckedItems && {
+                        onCheck: (checked) => handleCheck(entry.reference, checked),
+                    })}
                 />
             ))}
         </div>

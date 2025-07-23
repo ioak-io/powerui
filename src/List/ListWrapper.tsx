@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import ListItem from "./ListItem";
 
 /**
  * Component to render drop down input form element. Supports multi select and auto complete features
@@ -33,7 +32,29 @@ export const listSchema: ListSchema = {
             type: "tag",
             label: "Tags"
         }
-    ]
+    ],
+    actions: {
+        primaryMenu: [
+            {
+                label: "View",
+                type: "delete"
+            },
+            {
+                label: "Delete",
+                type: "delete"
+            }
+        ],
+        contextMenu: [
+            {
+                label: "View",
+                type: "delete"
+            },
+            {
+                label: "Delete",
+                type: "delete"
+            }
+        ]
+    }
 }
 
 const EXAMPLE_DATA: any[] = [
@@ -246,6 +267,14 @@ const ListWrapper = (props: {
 
     const [checkedItems, setCheckedItems] = useState<string[]>([]);
 
+    const handleItemClick = (itemreference: any) => {
+        if (!checkedItems.includes(itemreference)) {
+            setCheckedItems([...checkedItems, itemreference]);
+        } else {
+            setCheckedItems(checkedItems.filter(item => item !== itemreference));
+        }
+    }
+
     return (
         <div style={{ padding: "24px" }}>
             <List
@@ -253,6 +282,7 @@ const ListWrapper = (props: {
                 data={EXAMPLE_DATA}
                 checkedItems={checkedItems}
                 setCheckedItems={setCheckedItems}
+                onItemClick={handleItemClick}
 
             // onClick={handleClick}
             // selectedItems={selectedItems}

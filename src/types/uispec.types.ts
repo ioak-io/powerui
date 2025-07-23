@@ -62,12 +62,6 @@ export interface FormAction {
     generation?: {
         id: string;
         inputFields?: FormFieldSchema[];
-        confirmPrompt?: {
-            title?: string;
-            message?: string;
-            confirmLabel?: string;
-            cancelLabel?: string;
-        };
     };
 }
 
@@ -91,5 +85,9 @@ export interface ListSchema {
         subtitle?: { type: "static" | "dynamic", field?: string, value?: string };
         actionMap?: { singleSelect?: FormAction[], multiSelect?: FormAction[], noneSelect?: FormAction[] };
     };
+    actions?: {
+        primaryMenu?: FormAction[],
+        contextMenu?: FormAction[]
+    }
     fields: FormFieldSchema[];
 }

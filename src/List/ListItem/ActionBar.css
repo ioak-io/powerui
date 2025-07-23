@@ -1,0 +1,28 @@
+.powerui-actionbar {
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+}
+
+.powerui-actionbar__popover {
+    background-color: var(--basicui-bg-card);
+    border-radius: 4px;
+    border: 1px solid var(--basicui-border-color);
+    padding: 6px 6px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.powerui-actionbar__popover__button {
+    display: flex;
+    justify-content: flex-start;
+    padding: 12px 12px;
+    border-radius: 4px;
+    column-gap: 12px;
+}
+
+.powerui-actionbar__popover__button:hover {
+    background-color: var(--basicui-bg-accent);
+}

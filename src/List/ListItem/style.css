@@ -1,11 +1,16 @@
 .powerui-list-item {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: flex-start;
     column-gap: 12px;
     padding: 12px 12px;
     border-radius: 12px;
-    /* border: 1px solid var(--basicui-border-color); */
+    border: 1px solid transparent;
     background-color: var(--basicui-bg-surface);
+}
+
+.powerui-list-item--checked {
+    border-color: var(--basicui-bg-primary);
 }
 
 .powerui-list-item__checkbox {
