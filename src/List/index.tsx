@@ -1,16 +1,17 @@
 import React, { ReactNode } from 'react';
 
 import './style.css';
-import { ListSchema } from '../types/uispec.types';
+import { FormAction, FormSchema } from '../types/uispec.types';
 import { getClassName } from '../utils/ClassNameUtils';
 import ListItem from './ListItem';
 
 const BASE_CLASS = 'powerui-list';
 
 interface ListProps {
-    listSchema: ListSchema;
+    listSchema: FormSchema;
     data: Record<string, any>[];
-    actions?: { noneSelect: ReactNode[], singleSelect: ReactNode[], multiSelect: ReactNode[] };
+    actions?: ReactNode[];
+    onActionClick?: (e: FormAction, reference: string) => Promise<void>;
     checkedItems: string[];
     setCheckedItems?: (items: string[]) => void;
     onItemClick?: (itemReference: string) => void;
@@ -38,9 +39,7 @@ const List: React.FC<ListProps> = (props) => {
                     pagination
                 </div>
                 <div className={getClassName(BASE_CLASS, ["actionheader", "actions"])}>
-                    {!props.checkedItems || props.checkedItems.length === 0 && props.actions?.noneSelect}
-                    {props.checkedItems?.length === 1 && props.actions?.singleSelect}
-                    {props.checkedItems?.length > 1 && props.actions?.multiSelect}
+                    {props.actions}
                 </div>
             </div>
             {props.data.map((entry, index) => (
@@ -53,6 +52,7 @@ const List: React.FC<ListProps> = (props) => {
                     {...(props.setCheckedItems && {
                         onCheck: (checked) => handleCheck(entry.reference, checked),
                     })}
+                    onActionClick={props.onActionClick}
                 />
             ))}
         </div>

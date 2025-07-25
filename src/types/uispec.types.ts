@@ -57,7 +57,7 @@ export interface FormFieldSchema {
 export interface FormAction {
     label: string;
     type: "save" | "reset" | "cancel" | "delete" | "generate" | "custom";
-    icon?: string;
+    icon?: any;
 
     generation?: {
         id: string;
@@ -71,23 +71,28 @@ export interface FormSchema {
         subtitle?: { type: "static" | "dynamic", field?: string, value?: string };
         actions?: FormAction[];
     };
+    versioning?: boolean;
     fields: FormFieldSchema[];
-    children?: {
-        domain: string;
-        field: { parent: string; child: string };
-        listSchema: ListSchema;
-    }[]
-}
-
-export interface ListSchema {
-    header?: {
-        title?: { type: "static" | "dynamic", field?: string, value?: string };
-        subtitle?: { type: "static" | "dynamic", field?: string, value?: string };
-        actionMap?: { singleSelect?: FormAction[], multiSelect?: FormAction[], noneSelect?: FormAction[] };
-    };
     actions?: {
         primaryMenu?: FormAction[],
         contextMenu?: FormAction[]
-    }
-    fields: FormFieldSchema[];
+    },
+    children?: {
+        domain: string;
+        field: { parent: string; child: string };
+        formSchemaId: string;
+    }[]
+}
+
+// common types
+export interface DomainVersion {
+    _id: string;
+    __version: string;
+    __columns: Record<string, number>;
+    __percentage: number;
+    reference: string;
+    updatedBy: string;
+    updatedAt: Date
+    createdBy: string;
+    createdAt: Date;
 }

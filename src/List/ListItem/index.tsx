@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import './style.css';
-import { ListSchema } from '../../types/uispec.types';
+import { FormAction, FormSchema } from '../../types/uispec.types';
 import FieldRenderer from '../FieldRenderer';
 import { Checkbox } from 'basicui';
 import { getClassName } from '../../utils/ClassNameUtils';
@@ -11,10 +11,11 @@ const BASE_CLASS = 'powerui-list-item';
 
 interface ListItemProps {
     data: Record<string, any>;
-    schema: ListSchema;
+    schema: FormSchema;
     onClick?: () => void;
     onCheck?: (checked: boolean) => void;
     isChecked?: boolean;
+    onActionClick?: (e: FormAction, reference: string) => Promise<void>;
 }
 
 const ListItem: React.FC<ListItemProps> = (props) => {
@@ -23,9 +24,14 @@ const ListItem: React.FC<ListItemProps> = (props) => {
         return path.split('.').reduce((acc, key) => acc?.[key], props.data);
     };
 
+    const handleActionClick = async (e: FormAction) => {
+        await props.onActionClick?.(e, props.data.reference);
+    }
+
     return (
         <div className={getClassName(BASE_CLASS, [], props.isChecked ? ["checked"] : [])}>
-            <ActionBar isChecked={props.isChecked} schema={props.schema} onCheck={props.onCheck} />
+            <ActionBar isChecked={props.isChecked} schema={props.schema} onCheck={props.onCheck}
+                onActionClick={handleActionClick} />
             <button className={getClassName(BASE_CLASS, ["main"], [], "basicui-clean-button")} onClick={props.onClick}>
                 {props.schema.fields.map((field) => (
                     <FieldRenderer
