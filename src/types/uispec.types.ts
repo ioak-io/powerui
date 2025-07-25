@@ -56,7 +56,7 @@ export interface FormFieldSchema {
 
 export interface FormAction {
     label: string;
-    type: "save" | "reset" | "cancel" | "delete" | "generate" | "custom";
+    type: "save" | "reset" | "cancel" | "delete" | "generate" | "version" | "custom";
     icon?: any;
 
     generation?: {
