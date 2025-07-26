@@ -12,9 +12,11 @@ const SelectField: React.FC<FieldComponentProps> = ({
     field,
     fieldPath,
     value,
+    editField,
+    onRequestEdit,
+    onFinishEdit,
     onChange
 }) => {
-    const [isEdit, setIsEdit] = useState(false);
     const [localValue, setLocalValue] = useState<string>("");
     const [localValues, setLocalValues] = useState<string[]>([]);
 
@@ -24,7 +26,7 @@ const SelectField: React.FC<FieldComponentProps> = ({
 
     const handleSubmit = () => {
         onChange(localValue);
-        setIsEdit(false);
+        onFinishEdit();
     };
 
     const handleChange = (e: any) => {
@@ -41,16 +43,23 @@ const SelectField: React.FC<FieldComponentProps> = ({
         } else {
             setLocalValue(value)
         }
-        setIsEdit(false);
+        onRequestEdit(undefined)
     };
+
+    const handleRequestEdit = () => {
+        if (!editField) {
+            onRequestEdit(fieldPath)
+        }
+    }
 
     return (
         <ChatBubble
-            isEdit={isEdit}
-            onEdit={() => setIsEdit(true)}
-            onCancel={() => setIsEdit(false)}
+            isEdit={editField === fieldPath}
+            onEdit={handleRequestEdit}
+            onCancel={() => onRequestEdit(undefined)}
+            disabled={!!editField && editField !== fieldPath}
         >
-            {!isEdit ? (
+            {editField !== fieldPath ? (
                 <>
                     <span className={getClassName(BASE_CLASS, ["label"])}>{field.label}</span>
                     {Array.isArray(value) && value.length > 0 && <span className={getClassName(BASE_CLASS, ["value"])}>

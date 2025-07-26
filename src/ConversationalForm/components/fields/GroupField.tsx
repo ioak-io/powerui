@@ -11,6 +11,9 @@ interface GroupFieldProps {
     value: any;
     onChange: (val: any) => void;
     isEven?: boolean;
+    editField: string | undefined;
+    onRequestEdit: (e?: string) => void;
+    onFinishEdit: () => void;
 }
 
 const BASE_CLASS = "powerui-cf-groupfield"
@@ -59,6 +62,9 @@ const GroupField: React.FC<GroupFieldProps> = (props) => {
                         value={props.value?.[subField.name]}
                         onChange={(val) => updateNestedValue(subField.name, val)}
                         isEven={!props.isEven}
+                        editField={props.editField}
+                        onRequestEdit={props.onRequestEdit}
+                        onFinishEdit={props.onFinishEdit}
                     />
                 ))}
             </div>

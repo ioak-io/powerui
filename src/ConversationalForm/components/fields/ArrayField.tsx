@@ -11,13 +11,16 @@ interface ArrayFieldProps {
     value: any[];
     onChange: (val: any[]) => void;
     isEven?: boolean;
+    editField: string | undefined;
+    onRequestEdit: (e?: string) => void;
+    onFinishEdit: () => void;
 }
 
 const BASE_CLASS = "powerui-cf-arrayfield";
 
 const ArrayField: React.FC<ArrayFieldProps> = (props) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
-    
+
     const handleAddItem = () => {
         const emptyItem: any = {};
         props.field.fields?.forEach(sub => {
@@ -97,6 +100,9 @@ const ArrayField: React.FC<ArrayFieldProps> = (props) => {
                                     onChange={(val) => updateItem(index, subField.name, val)}
                                     isEven={!props.isEven}
                                     shortPathTitle
+                                    editField={props.editField}
+                                    onRequestEdit={props.onRequestEdit}
+                                    onFinishEdit={props.onFinishEdit}
                                 />
                             ))}
                         </div>

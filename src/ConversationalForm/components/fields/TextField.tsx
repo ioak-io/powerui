@@ -14,8 +14,10 @@ const TextField: React.FC<FieldComponentProps> = ({
     fieldPath,
     value,
     onChange,
+    editField,
+    onRequestEdit,
+    onFinishEdit
 }) => {
-    const [isEdit, setIsEdit] = useState(false);
     const [localValue, setLocalValue] = useState('');
 
     useEffect(() => {
@@ -24,23 +26,29 @@ const TextField: React.FC<FieldComponentProps> = ({
 
     const handleSubmit = () => {
         onChange(localValue);
-        setIsEdit(false);
+        onFinishEdit();
     };
 
     const handleCancel = () => {
         setLocalValue(value || '');
-        setIsEdit(false);
+        onRequestEdit(undefined)
     };
+
+    const handleRequestEdit = () => {
+        if (!editField) {
+            onRequestEdit(fieldPath)
+        }
+    }
 
     return (
         <ChatBubble
-            isEdit={isEdit}
-            onEdit={() => setIsEdit(true)}
-            onCancel={() => setIsEdit(false)}
+            isEdit={editField === fieldPath}
+            onEdit={handleRequestEdit}
+            onCancel={() => onRequestEdit(undefined)}
+            disabled={!!editField && editField !== fieldPath}
         >
-            {!isEdit ? (
+            {editField !== fieldPath ? (
                 <>
-                    {/* <span className={getClassName(BASE_CLASS, ["label"])}>{prettify(fieldPath)}: </span> */}
                     <span className={getClassName(BASE_CLASS, ["label"])}>{field.label} </span>
                     {!isEmptyOrSpaces(value) && <span className={getClassName(BASE_CLASS, ["value"])}>{value}</span>}
                 </>
@@ -51,7 +59,7 @@ const TextField: React.FC<FieldComponentProps> = ({
                     </div>
                     <div className={getClassName(BASE_CLASS, ["edit", "reply"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["reply"]))} onClick={(e) => e.stopPropagation()}>
                         <input
-                            name={field.name}
+                            name={fieldPath}
                             autoComplete='off'
                             autoFocus
                             type="text"

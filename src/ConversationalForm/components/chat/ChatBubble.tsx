@@ -8,6 +8,7 @@ interface ChatBubbleProps {
     onCancel: () => void;
     children: React.ReactNode;
     role?: "default" | "reply";
+    disabled?: boolean;
 }
 
 const BASE_CLASS = "powerui-cf-chatbubble";
@@ -37,8 +38,12 @@ const ChatBubble: React.FC<ChatBubbleProps> = (props) => {
         if (props.role) {
             _addClass.push(props.role);
         }
+
+        if (props.disabled) {
+            _addClass.push("disabled");
+        }
         setAddClass(_addClass);
-    }, [props.role, props.isEdit]);
+    }, [props.role, props.isEdit, props.disabled]);
 
     useEffect(() => {
         if (!props.isEdit) return;

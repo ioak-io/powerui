@@ -17,6 +17,8 @@ const BASE_CLASS = "powerui-cf";
 const NestedChatForm: React.FC<NestedChatFormProps> = (props) => {
     const [searchText, setSearchText] = useState('');
 
+    const [editField, setEditField] = useState<string>();
+
     const updateFormDataAtPath = (path: string, value: any) => {
         const segments = path.split('.');
         const updated = { ...props.formData };
@@ -74,6 +76,50 @@ const NestedChatForm: React.FC<NestedChatFormProps> = (props) => {
         return filterFieldsBySearch(props.schema.fields, '');
     }, [searchText, props.schema.fields]);
 
+    const flattenFieldsWithData = (
+        fields: FormFieldSchema[],
+        formData: any,
+        pathPrefix = ''
+    ): string[] => {
+        return fields.flatMap((field) => {
+            const fullPath = pathPrefix ? `${pathPrefix}.${field.name}` : field.name;
+            const fieldData = getValueAtPath(fullPath);
+
+            if ((field.type === 'group') && field.fields) {
+                return flattenFieldsWithData(field.fields, formData, fullPath);
+            }
+
+            if (field.type === 'array' && Array.isArray(fieldData) && field.fields) {
+                return fieldData.flatMap((_, index) => {
+                    const itemPath = `${fullPath}.${index}`;
+                    return flattenFieldsWithData(field.fields, formData, itemPath);
+                });
+            }
+
+            return [fullPath];
+        });
+    };
+
+
+    const flattenedFieldPaths = useMemo(() => {
+        return flattenFieldsWithData(props.schema.fields, props.formData);
+    }, [props.schema.fields, props.formData]);
+
+    const handleFinishEdit = () => {
+        if (!editField) return;
+
+        const currentIndex = flattenedFieldPaths.indexOf(editField);
+        if (currentIndex >= 0 && currentIndex < flattenedFieldPaths.length - 1) {
+            setEditField(flattenedFieldPaths[currentIndex + 1]);
+        } else {
+            setEditField(undefined); // Done editing
+        }
+
+        console.log(flattenedFieldPaths)
+    };
+
+
+
     return (
         <div className={getClassName(BASE_CLASS)}>
             <div className={getClassName(BASE_CLASS, ["actionheader"])}>
@@ -98,6 +144,9 @@ const NestedChatForm: React.FC<NestedChatFormProps> = (props) => {
                     fieldPath={field.name}
                     value={getValueAtPath(field.name)}
                     onChange={(val: any) => updateFormDataAtPath(field.name, val)}
+                    editField={editField}
+                    onRequestEdit={(e) => setEditField(e)}
+                    onFinishEdit={handleFinishEdit}
                 />
             ))}
         </div>
