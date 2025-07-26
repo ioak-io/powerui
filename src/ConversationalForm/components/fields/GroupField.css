@@ -19,11 +19,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    opacity: 1;
+    transition: opacity 500ms ease-in-out;
     /* padding-bottom: 12px; */
 }
 
 .powerui-cf-groupfield__header h6 {
     margin: 0;
+}
+
+.powerui-cf-groupfield__header--disabled {
+    opacity: 0.25;
 }
 
 .powerui-cf-groupfield__main {

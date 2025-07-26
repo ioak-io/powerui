@@ -1,0 +1,17 @@
+.powerui-cf-replyaction {
+    display: flex;
+    column-gap: 12px;
+    margin-top: 12px;
+    align-items: center;
+}
+
+.powerui-cf-replyaction__ok {
+    background-color: var(--basicui-bg-primary);
+    color: var(--basicui-fg-primary);
+    padding: 6px 6px;
+    border-radius: 4px;
+}
+
+.powerui-cf-replyaction__ok svg {
+    fill: var(--basicui-fg-primary);
+}

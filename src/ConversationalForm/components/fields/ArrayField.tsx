@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormFieldSchema } from '../../../types/uispec.types';
 import FieldRenderer from '../FieldRenderer';
 import './ArrayField.css';
@@ -12,8 +12,9 @@ interface ArrayFieldProps {
     onChange: (val: any[]) => void;
     isEven?: boolean;
     editField: string | undefined;
-    onRequestEdit: (e?: string) => void;
+    onStartEdit: (e?: string) => void;
     onFinishEdit: () => void;
+    onCancelEdit: () => void;
 }
 
 const BASE_CLASS = "powerui-cf-arrayfield";
@@ -45,9 +46,15 @@ const ArrayField: React.FC<ArrayFieldProps> = (props) => {
         setIsCollapsed(!isCollapsed);
     };
 
+    // useEffect(() => {
+    //     if (props.editField === props.fieldPath) {
+    //         props.onFinishEdit();
+    //     }
+    // }, [props.editField, props.fieldPath])
+
     return (
         <div className={getClassName(BASE_CLASS, [], props.isEven ? ["even"] : [])}>
-            <div className={getClassName(BASE_CLASS, ["header"])}>
+            <div className={getClassName(BASE_CLASS, ["header"], (!!props.editField && props.editField !== props.fieldPath) ? ["disabled"] : [])}>
                 <h6>{prettify(`${props.fieldPath}`)}</h6>
                 <button
                     onClick={toggleCollapse}
@@ -101,8 +108,9 @@ const ArrayField: React.FC<ArrayFieldProps> = (props) => {
                                     isEven={!props.isEven}
                                     shortPathTitle
                                     editField={props.editField}
-                                    onRequestEdit={props.onRequestEdit}
+                                    onStartEdit={props.onStartEdit}
                                     onFinishEdit={props.onFinishEdit}
+                                    onCancelEdit={props.onCancelEdit}
                                 />
                             ))}
                         </div>

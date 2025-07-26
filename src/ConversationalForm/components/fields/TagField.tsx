@@ -5,6 +5,7 @@ import { getClassName } from '../../../utils/ClassNameUtils';
 import { BASE_CLASS_FIELD_RENDERER_SHARED } from '../FieldRenderer';
 import './TagField.css';
 import { SvgIcon } from 'basicui';
+import ReplyAction from '../chat/ReplyAction';
 
 const BASE_CLASS = 'powerui-cf-tagfield';
 
@@ -13,8 +14,11 @@ const TagField: React.FC<FieldComponentProps> = ({
     fieldPath,
     value = [],
     onChange,
+    editField,
+    onStartEdit,
+    onFinishEdit,
+    onCancelEdit
 }) => {
-    const [isEdit, setIsEdit] = useState(false);
     const [localValue, setLocalValue] = useState<{ id?: string; value: string }[]>(
         Array.isArray(value) ? value : []
     );
@@ -45,13 +49,13 @@ const TagField: React.FC<FieldComponentProps> = ({
 
     const handleSubmit = () => {
         onChange(localValue);
-        setIsEdit(false);
+        onFinishEdit();
     };
 
     const handleCancel = () => {
         setLocalValue(Array.isArray(value) ? value : []);
         setInputValue('');
-        setIsEdit(false);
+        onCancelEdit();
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -61,13 +65,20 @@ const TagField: React.FC<FieldComponentProps> = ({
         }
     };
 
+    const handleRequestEdit = () => {
+        if (!editField) {
+            onStartEdit(fieldPath)
+        }
+    }
+
     return (
         <ChatBubble
-            isEdit={isEdit}
-            onEdit={() => setIsEdit(true)}
-            onCancel={handleCancel}
+            isEdit={editField === fieldPath}
+            onEdit={handleRequestEdit}
+            onCancel={onCancelEdit}
+            disabled={!!editField && editField !== fieldPath}
         >
-            {!isEdit ? (
+            {editField !== fieldPath ? (
                 <>
                     <div className={getClassName(BASE_CLASS, ['read', 'label'])}>{field.label}</div>
                     {localValue.length > 0 && <div className={getClassName(BASE_CLASS, ['read', 'tags'])}>
@@ -99,19 +110,8 @@ const TagField: React.FC<FieldComponentProps> = ({
                                 </span>
                             ))}
                         </div>
-                        <div className={getClassName(BASE_CLASS, ['edit', 'reply', "tags", "actions"])}>
-                            <button className={getClassName(BASE_CLASS, ['edit', 'reply', "tags", "actions", "cancel"], [], "basicui-clean-button")} onClick={handleCancel}>
-                                <SvgIcon height="16px" width="16px">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path d="M242.7 256L345.6 153.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L197.3 210.7 94.6 108.1c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L152.7 256 49.4 359.6c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L197.3 301.3l102.7 102.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L242.7 256z" /></svg>
-                                </SvgIcon>
-                            </button>
-                            <button className={getClassName(BASE_CLASS, ['edit', 'reply', "tags", "actions", "send"], [], "basicui-clean-button")} onClick={handleSubmit}>
-                                <SvgIcon height="16px" width="16px">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" /></svg>
-                                </SvgIcon>
-                            </button>
-                        </div>
                     </div>
+                    <ReplyAction onSave={handleSubmit} onCancel={handleCancel} />
                 </div>
             )
             }

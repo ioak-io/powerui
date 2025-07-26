@@ -8,6 +8,7 @@ export interface FieldComponentProps {
   isEven?: boolean;
   shortPathTitle?: boolean;
   editField: string | undefined;
-  onRequestEdit: (e?: string) => void;
+  onStartEdit: (e?: string) => void;
+  onCancelEdit: () => void;
   onFinishEdit: () => void;
 }

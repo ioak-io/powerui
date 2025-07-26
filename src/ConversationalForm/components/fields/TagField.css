@@ -47,22 +47,6 @@
     padding: 12px;
 }
 
-.powerui-cf-tagfield__edit__reply__tags__actions {
-    display: flex;
-    column-gap: 12px;
-    justify-content: flex-end;
-    padding-top: 12px;
-}
-
-.powerui-cf-tagfield__edit__reply__tags__actions__cancel svg {
-    fill: var(--basicui-bg-default);
-}
-
-
-.powerui-cf-tagfield__edit__reply__tags__actions__send svg {
-    fill: var(--basicui-bg-primary);
-}
-
 .powerui-cf-tagfield__read__label {
     color: var(--basicui-fg-disabled);
 }

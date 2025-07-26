@@ -12,8 +12,9 @@ interface GroupFieldProps {
     onChange: (val: any) => void;
     isEven?: boolean;
     editField: string | undefined;
-    onRequestEdit: (e?: string) => void;
+    onStartEdit: (e?: string) => void;
     onFinishEdit: () => void;
+    onCancelEdit: () => void;
 }
 
 const BASE_CLASS = "powerui-cf-groupfield"
@@ -31,7 +32,7 @@ const GroupField: React.FC<GroupFieldProps> = (props) => {
 
     return (
         <div className={getClassName(BASE_CLASS, [], props.isEven ? ["even"] : [])}>
-            <div className={getClassName(BASE_CLASS, ["header"])}>
+            <div className={getClassName(BASE_CLASS, ["header"], (!!props.editField && props.editField !== props.fieldPath) ? ["disabled"] : [])}>
                 <h6>{prettify(`${props.fieldPath}`)}</h6>
                 <button
                     onClick={toggleCollapse}
@@ -63,8 +64,9 @@ const GroupField: React.FC<GroupFieldProps> = (props) => {
                         onChange={(val) => updateNestedValue(subField.name, val)}
                         isEven={!props.isEven}
                         editField={props.editField}
-                        onRequestEdit={props.onRequestEdit}
+                        onStartEdit={props.onStartEdit}
                         onFinishEdit={props.onFinishEdit}
+                        onCancelEdit={props.onCancelEdit}
                     />
                 ))}
             </div>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, ReactNode } from 'react';
+import React, { useState, useMemo, ReactNode, useEffect } from 'react';
 import { FormSchema, FormFieldSchema } from '../types/uispec.types';
 import FieldRenderer from './components/FieldRenderer';
 import './style.css';
@@ -73,6 +73,7 @@ const NestedChatForm: React.FC<NestedChatFormProps> = (props) => {
 
     const filteredFields = useMemo(() => {
         if (!searchText.trim()) return props.schema.fields;
+        setEditField(undefined);
         return filterFieldsBySearch(props.schema.fields, '');
     }, [searchText, props.schema.fields]);
 
@@ -85,20 +86,26 @@ const NestedChatForm: React.FC<NestedChatFormProps> = (props) => {
             const fullPath = pathPrefix ? `${pathPrefix}.${field.name}` : field.name;
             const fieldData = getValueAtPath(fullPath);
 
-            if ((field.type === 'group') && field.fields) {
+            if (field.type === 'group' && field.fields) {
                 return flattenFieldsWithData(field.fields, formData, fullPath);
             }
 
-            if (field.type === 'array' && Array.isArray(fieldData) && field.fields) {
+            if (field.type === 'array') {
+                if (!Array.isArray(fieldData) || fieldData.length === 0) {
+                    // Skip this array field entirely if it has no entries
+                    return [];
+                }
+
                 return fieldData.flatMap((_, index) => {
                     const itemPath = `${fullPath}.${index}`;
-                    return flattenFieldsWithData(field.fields, formData, itemPath);
+                    return flattenFieldsWithData(field.fields!, formData, itemPath);
                 });
             }
 
             return [fullPath];
         });
     };
+
 
 
     const flattenedFieldPaths = useMemo(() => {
@@ -109,14 +116,22 @@ const NestedChatForm: React.FC<NestedChatFormProps> = (props) => {
         if (!editField) return;
 
         const currentIndex = flattenedFieldPaths.indexOf(editField);
+        console.log(currentIndex, flattenedFieldPaths, currentIndex >= 0 && currentIndex < flattenedFieldPaths.length - 1);
         if (currentIndex >= 0 && currentIndex < flattenedFieldPaths.length - 1) {
             setEditField(flattenedFieldPaths[currentIndex + 1]);
+            console.log("*", flattenedFieldPaths[currentIndex + 1]);
         } else {
-            setEditField(undefined); // Done editing
+            setEditField(undefined);
         }
-
-        console.log(flattenedFieldPaths)
     };
+
+    const handleCancelEdit = () => {
+        setEditField(undefined);
+    }
+
+    useEffect(() => {
+        console.log(editField)
+    }, [editField]);
 
 
 
@@ -145,8 +160,9 @@ const NestedChatForm: React.FC<NestedChatFormProps> = (props) => {
                     value={getValueAtPath(field.name)}
                     onChange={(val: any) => updateFormDataAtPath(field.name, val)}
                     editField={editField}
-                    onRequestEdit={(e) => setEditField(e)}
+                    onStartEdit={(e) => setEditField(e)}
                     onFinishEdit={handleFinishEdit}
+                    onCancelEdit={handleCancelEdit}
                 />
             ))}
         </div>

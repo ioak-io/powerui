@@ -5,6 +5,7 @@ import { getClassName } from '../../../utils/ClassNameUtils';
 import { Select, SvgIcon } from 'basicui';
 import { BASE_CLASS_FIELD_RENDERER_SHARED } from '../FieldRenderer';
 import './SelectField.css';
+import ReplyAction from '../chat/ReplyAction';
 
 const BASE_CLASS = "powerui-cf-selectfield";
 
@@ -13,15 +14,16 @@ const SelectField: React.FC<FieldComponentProps> = ({
     fieldPath,
     value,
     editField,
-    onRequestEdit,
+    onStartEdit,
     onFinishEdit,
+    onCancelEdit,
     onChange
 }) => {
     const [localValue, setLocalValue] = useState<string>("");
     const [localValues, setLocalValues] = useState<string[]>([]);
 
     useEffect(() => {
-        handleCancel();
+        _reset();
     }, [value])
 
     const handleSubmit = () => {
@@ -37,18 +39,22 @@ const SelectField: React.FC<FieldComponentProps> = ({
         }
     };
 
-    const handleCancel = () => {
+    const _reset = () => {
         if (field.multiple) {
             setLocalValues(Array.isArray(value) ? value : []);
         } else {
             setLocalValue(value)
         }
-        onRequestEdit(undefined)
+    }
+
+    const handleCancel = () => {
+        _reset();
+        onCancelEdit();
     };
 
     const handleRequestEdit = () => {
         if (!editField) {
-            onRequestEdit(fieldPath)
+            onStartEdit(fieldPath)
         }
     }
 
@@ -56,7 +62,7 @@ const SelectField: React.FC<FieldComponentProps> = ({
         <ChatBubble
             isEdit={editField === fieldPath}
             onEdit={handleRequestEdit}
-            onCancel={() => onRequestEdit(undefined)}
+            onCancel={onCancelEdit}
             disabled={!!editField && editField !== fieldPath}
         >
             {editField !== fieldPath ? (
@@ -87,17 +93,8 @@ const SelectField: React.FC<FieldComponentProps> = ({
                             options={field.options || []}
                             onChange={handleChange}
                         />}
-                        <button className={getClassName(BASE_CLASS, ["edit", "reply", "cancel"], [], "basicui-clean-button")} onClick={handleCancel} aria-label="Cancel">
-                            <SvgIcon height="16px" width="16px">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path d="M242.7 256L345.6 153.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L197.3 210.7 94.6 108.1c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L152.7 256 49.4 359.6c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L197.3 301.3l102.7 102.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L242.7 256z" /></svg>
-                            </SvgIcon>
-                        </button>
-                        <button className={getClassName(BASE_CLASS, ["edit", "reply", "send"], [], "basicui-clean-button")} onClick={handleSubmit}>
-                            <SvgIcon height="16px" width="16px">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" /></svg>
-                            </SvgIcon>
-                        </button>
                     </div>
+                    <ReplyAction onSave={handleSubmit} onCancel={handleCancel} />
                 </div>
             )}
         </ChatBubble>

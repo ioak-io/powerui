@@ -16,6 +16,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    opacity: 1;
+    transition: opacity 500ms ease-in-out;
+}
+
+.powerui-cf-arrayfield__header--disabled {
+    opacity: 0.25;
 }
 
 .powerui-cf-arrayfield__header h6 {

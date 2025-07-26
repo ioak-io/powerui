@@ -8,9 +8,9 @@
 .powerui-cf-textfield__edit__reply {
     display: flex;
     align-items: center;
-    border-radius: 6px;
-    padding: 12px;
-    border: 1px solid var(--powerui-cf-border-color);
+    /* border-radius: 6px; */
+    /* border: 1px solid var(--powerui-cf-border-color); */
+    /* border-bottom: 1px solid var(--powerui-cf-border-color); */
     background-color: var(--powerui-cf-bg-field-input);
     color: var(--basicui-fg);
     gap: 12px;
@@ -22,14 +22,19 @@
     outline: none;
     background-color: transparent;
     color: var(--basicui-fg);
+    border-bottom: 2px solid var(--powerui-cf-border-color);
+    transition: border-color 250ms ease-in-out;
+    padding: 12px 0;
+    font-size: 20px;
 }
 
-.powerui-cf-textfield__edit__reply__send svg {
-    fill: var(--basicui-bg-primary);
+.powerui-cf-textfield__edit__reply__input:focus {
+    /* border-color: var(--basicui-bg-primary) */
 }
 
-.powerui-cf-textfield__edit__reply__cancel svg {
-    fill: var(--basicui-bg-default);
+.powerui-cf-textfield__edit__reply__input::placeholder {
+    color: var(--basicui-bg-primary);
+    opacity: 0.4;
 }
 
 .powerui-cf-textfield__label {
