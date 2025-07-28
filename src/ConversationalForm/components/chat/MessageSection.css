@@ -1,47 +1,18 @@
-.powerui-cf-replyaction {
+.powerui-cf-messagesection {
+    /* color: var(--basicui-bg-danger-muted); */
+    /* color: var(--basicui-bg-default-text); */
+    margin-top: 6px;
     display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+.powerui-cf-messagesection__message {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-}
-.powerui-cf-replyaction__left {
-    display: flex;
-    column-gap: 12px;
-    margin-top: 12px;
-    align-items: center;
+    gap: 4px;
 }
 
-.powerui-cf-replyaction__left__ok {
-    background-color: var(--basicui-bg-primary);
-    border: 1px solid var(--basicui-bg-primary);
-    color: var(--basicui-fg-primary);
-    padding: 6px 6px;
-    border-radius: 4px;
-}
-
-.powerui-cf-replyaction__left__ok svg {
-    fill: var(--basicui-fg-primary);
-}
-
-.powerui-cf-replyaction__left__assist {
-    /* background-color: var(--basicui-bg-warning); */
-    color: var(--basicui-bg-primary);
-    /* border: 1px solid var(--basicui-border-color); */
-    padding: 6px 6px;
-    border-radius: 4px;
-}
-
-.powerui-cf-replyaction__left__assist svg {
-    fill: var(--basicui-bg-primary);
-}
-
-.powerui-cf-replyaction__cancel {
-    /* border: 1px solid var(--basicui-fg); */
-    color: var(--basicui-fg);
-    opacity: 0.4;
-    padding: 6px 6px;
-    border-radius: 4px;
-}
-
-.powerui-cf-replyaction__cancel svg {
-    fill: var(--basicui-fg);
+.powerui-cf-messagesection__message svg {
+    fill: var(--basicui-bg-danger-muted);
 }

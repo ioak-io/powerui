@@ -10,6 +10,7 @@ interface NestedChatFormProps {
     formData: any;
     onChange: (data: any) => void;
     actions?: ReactNode;
+    errorMap?: Record<string, string[]>;
 }
 
 const BASE_CLASS = "powerui-cf";
@@ -163,6 +164,7 @@ const NestedChatForm: React.FC<NestedChatFormProps> = (props) => {
                     onStartEdit={(e) => setEditField(e)}
                     onFinishEdit={handleFinishEdit}
                     onCancelEdit={handleCancelEdit}
+                    errorMap={props.errorMap}
                 />
             ))}
         </div>

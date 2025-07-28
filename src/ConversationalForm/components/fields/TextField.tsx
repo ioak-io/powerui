@@ -7,6 +7,8 @@ import './TextField.css';
 import { SvgIcon } from 'basicui';
 import { isEmptyOrSpaces } from '../../../utils/Utils';
 import ReplyAction from '../chat/ReplyAction';
+import MessageSection from '../chat/MessageSection';
+import { requiredCheck } from './ValidationUtils';
 
 const BASE_CLASS = "powerui-cf-textfield";
 
@@ -18,13 +20,37 @@ const TextField: React.FC<FieldComponentProps> = ({
     editField,
     onStartEdit,
     onFinishEdit,
-    onCancelEdit
+    onCancelEdit,
+    errorMap
 }) => {
+
+    const [errors, setErrors] = useState<string[]>([]);
+    const [validationOutcome, setValidationOutcome] = useState<Record<string, boolean>>({});
+
+    useEffect(() => {
+        let _errors: string[] = [];
+        if (errorMap?.[fieldPath]) {
+            _errors = errorMap[fieldPath];
+        }
+        setErrors(_errors);
+    }, [errorMap]);
+
     const [localValue, setLocalValue] = useState('');
 
     useEffect(() => {
         setLocalValue(value || '');
     }, [value])
+
+    useEffect(() => {
+        const _validationOutcome: Record<string, boolean> = {}
+
+        _validationOutcome.required = requiredCheck(field.validation, localValue);
+        // other checks for minLength and maxLength
+
+        console.log(localValue, _validationOutcome.required);
+
+        setValidationOutcome(_validationOutcome);
+    }, [field, localValue]);
 
     const handleSubmit = () => {
         onChange(localValue);
@@ -78,10 +104,7 @@ const TextField: React.FC<FieldComponentProps> = ({
                             onChange={(e) => setLocalValue(e.target.value)}
                         />
                     </form>
-                    <div className="small">
-                        <div>This field is required</div>
-                        <div>Must be at least 100 characters</div>
-                    </div>
+                    <MessageSection errors={errors} validation={field.validation} validationOutcome={validationOutcome} />
                     <ReplyAction onSave={handleSubmit} onCancel={handleCancel} />
                 </div>
             )}

@@ -11,4 +11,5 @@ export interface FieldComponentProps {
   onStartEdit: (e?: string) => void;
   onCancelEdit: () => void;
   onFinishEdit: () => void;
+  errorMap?: Record<string, string[]>;
 }
