@@ -59,10 +59,17 @@ const TextField: React.FC<FieldComponentProps> = ({
                     <div className={getClassName(BASE_CLASS, ["edit", "prompt"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["prompt"]))}>
                         {field.conversationalPrompt || `Enter ${prettify(fieldPath)}:`}
                     </div>
-                    <div className={getClassName(BASE_CLASS, ["edit", "reply"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["reply"]))} onClick={(e) => e.stopPropagation()}>
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            handleSubmit();
+                        }}
+                        className={getClassName(BASE_CLASS, ["edit", "reply"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["reply"]))}
+                        onClick={(e) => e.stopPropagation()}
+                    >
                         <input
                             name={fieldPath}
-                            autoComplete='off'
+                            autoComplete="off"
                             autoFocus
                             type="text"
                             value={localValue}
@@ -70,6 +77,10 @@ const TextField: React.FC<FieldComponentProps> = ({
                             className={getClassName(BASE_CLASS, ["edit", "reply", "input"], [])}
                             onChange={(e) => setLocalValue(e.target.value)}
                         />
+                    </form>
+                    <div className="small">
+                        <div>This field is required</div>
+                        <div>Must be at least 100 characters</div>
                     </div>
                     <ReplyAction onSave={handleSubmit} onCancel={handleCancel} />
                 </div>

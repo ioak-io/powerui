@@ -33,7 +33,7 @@
 }
 
 .powerui-cf-textfield__edit__reply__input::placeholder {
-    color: var(--basicui-bg-primary);
+    /* color: var(--basicui-bg-primary); */
     opacity: 0.4;
 }
 

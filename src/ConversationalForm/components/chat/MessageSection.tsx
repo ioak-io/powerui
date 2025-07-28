@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './ReplyAction.css';
+import './MessageSection.css';
 import { getClassName } from '../../../utils/ClassNameUtils';
 import { SvgIcon } from 'basicui';
 
-interface ReplyActionProps {
+interface MessageSectionProps {
     onSave: () => void;
     onCancel: () => void;
     onAssist?: () => void;
 }
 
-const BASE_CLASS = "powerui-cf-replyaction";
+const BASE_CLASS = "powerui-cf-messagesection";
 
-const ReplyAction: React.FC<ReplyActionProps> = (props) => {
+const MessageSection: React.FC<MessageSectionProps> = (props) => {
     return (
         <div className={getClassName(BASE_CLASS)}>
             <div className={getClassName(BASE_CLASS, ["left"])}>
@@ -50,4 +50,4 @@ const ReplyAction: React.FC<ReplyActionProps> = (props) => {
     );
 };
 
-export default ReplyAction;
+export default MessageSection;

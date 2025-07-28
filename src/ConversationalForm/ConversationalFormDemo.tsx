@@ -146,6 +146,7 @@ const productSchema: FormFieldSchema = {
       type: "text",
       label: "Product name",
       conversationalPrompt: "What's the name of this product?",
+      placeholder: "Type a name for this product..."
     },
     {
       name: "link",
