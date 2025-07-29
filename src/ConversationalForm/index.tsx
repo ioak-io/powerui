@@ -4,6 +4,7 @@ import FieldRenderer from './components/FieldRenderer';
 import './style.css';
 import { getClassName } from '../utils/ClassNameUtils';
 import { Button, IconButton, SvgIcon, ThemeType } from 'basicui';
+import Assistant from './components/Assistant';
 
 interface NestedChatFormProps {
     schema: FormSchema;
@@ -11,6 +12,7 @@ interface NestedChatFormProps {
     onChange: (data: any) => void;
     actions?: ReactNode;
     errorMap?: Record<string, string[]>;
+    onAssist?: (assistantId: string, text: string, instruction: string, { onOpen, onMessage, onDone, onError, }: { onOpen?: () => void; onMessage: (msg: string) => void; onDone?: () => void; onError?: (err: any) => void; }) => Promise<void>;
 }
 
 const BASE_CLASS = "powerui-cf";
@@ -137,37 +139,40 @@ const NestedChatForm: React.FC<NestedChatFormProps> = (props) => {
 
 
     return (
-        <div className={getClassName(BASE_CLASS)}>
-            <div className={getClassName(BASE_CLASS, ["actionheader"])}>
-                <div className={getClassName(BASE_CLASS, ["actionheader", "search"])}>
-                    <input
-                        autoFocus
-                        type="text"
-                        placeholder="Search fields..."
-                        value={searchText}
-                        onChange={(e) => setSearchText(e.target.value)}
-                    />
+        <>
+            <div className={getClassName(BASE_CLASS)}>
+                <div className={getClassName(BASE_CLASS, ["actionheader"])}>
+                    <div className={getClassName(BASE_CLASS, ["actionheader", "search"])}>
+                        <input
+                            autoFocus
+                            type="text"
+                            placeholder="Search fields..."
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}
+                        />
+                    </div>
+                    <div className={getClassName(BASE_CLASS, ["actionheader", "actions"])}>
+                        {props.actions}
+                    </div>
                 </div>
-                <div className={getClassName(BASE_CLASS, ["actionheader", "actions"])}>
-                    {props.actions}
-                </div>
-            </div>
 
-            {filteredFields.map((field) => (
-                <FieldRenderer
-                    key={field.name}
-                    field={field}
-                    fieldPath={field.name}
-                    value={getValueAtPath(field.name)}
-                    onChange={(val: any) => updateFormDataAtPath(field.name, val)}
-                    editField={editField}
-                    onStartEdit={(e) => setEditField(e)}
-                    onFinishEdit={handleFinishEdit}
-                    onCancelEdit={handleCancelEdit}
-                    errorMap={props.errorMap}
-                />
-            ))}
-        </div>
+                {filteredFields.map((field) => (
+                    <FieldRenderer
+                        key={field.name}
+                        field={field}
+                        fieldPath={field.name}
+                        value={getValueAtPath(field.name)}
+                        onChange={(val: any) => updateFormDataAtPath(field.name, val)}
+                        editField={editField}
+                        onStartEdit={(e) => setEditField(e)}
+                        onFinishEdit={handleFinishEdit}
+                        onCancelEdit={handleCancelEdit}
+                        errorMap={props.errorMap}
+                        onAssist={props.onAssist}
+                    />
+                ))}
+            </div>
+        </>
     );
 };
 

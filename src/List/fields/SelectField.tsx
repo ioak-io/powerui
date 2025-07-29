@@ -3,7 +3,7 @@ import './SelectField.css';
 import { FieldComponentProps } from '../FieldComponentProps';
 import { getClassName } from '../../utils/ClassNameUtils';
 
-const BASE_CLASS = "powerui-cf-selectfield";
+const BASE_CLASS = "powerui-list-selectfield";
 
 const SelectField: React.FC<FieldComponentProps> = ({
     field,

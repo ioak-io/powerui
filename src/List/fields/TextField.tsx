@@ -4,7 +4,7 @@ import { getClassName } from '../../utils/ClassNameUtils';
 import { isEmptyOrSpaces } from '../../utils/Utils';
 import { FieldComponentProps } from '../FieldComponentProps';
 
-const BASE_CLASS = "powerui-cf-textfield";
+const BASE_CLASS = "powerui-list-textfield";
 
 const TextField: React.FC<FieldComponentProps> = ({
     field,

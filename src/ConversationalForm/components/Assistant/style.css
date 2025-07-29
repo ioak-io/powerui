@@ -1,0 +1,67 @@
+.powerui-assistant {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+}
+
+.powerui-assistant__content,
+.powerui-assistant__compose__input {
+    font-size: 16px;
+    width: 100%;
+    padding: 6px 6px;
+    border: 1px solid var(--basicui-border-color);
+    border-radius: 4px;
+    outline: none;
+    resize: none;
+    height: 200px;
+    background-color: transparent;
+    color: var(--basicui-fg);
+}
+
+.powerui-assistant__compose {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 6px;
+    border-bottom: 1px solid var(--basicui-border-color);
+    align-items: flex-end;
+    padding: 12px 0px;
+}
+
+.powerui-assistant__compose__input {
+    border: none;
+    height: 50px;
+}
+
+.powerui-assistant__compose__send {
+
+}
+
+.powerui-assistant__compose__send svg {
+    fill: var(--basicui-bg-primary);
+}
+.powerui-assistant__compose__send:hover svg {
+    fill: var(--basicui-bg-primary-text);
+}
+
+.powerui-assistant__prompts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 12px;
+    column-gap: 12px;
+}
+
+.powerui-assistant__prompts__button {
+    border: 1px solid var(--basicui-border-color);
+    border-radius: 24px;
+    padding: 4px 12px;
+    opacity: 0.6;
+    background-color: var(--basicui-bg-accent);
+    cursor: pointer;
+    transition: 250ms ease-in-out border-color, 250ms ease-in-out opacity;
+}
+
+.powerui-assistant__prompts__button:hover {
+    border-color: var(--basicui-bg-primary-transparent);
+    opacity: 1;
+}

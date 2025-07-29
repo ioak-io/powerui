@@ -1,5 +1,5 @@
 import { FormFieldSchema } from "../types/uispec.types";
- 
+
 export interface FieldComponentProps {
   field: FormFieldSchema;
   fieldPath: string;
@@ -12,4 +12,5 @@ export interface FieldComponentProps {
   onCancelEdit: () => void;
   onFinishEdit: () => void;
   errorMap?: Record<string, string[]>;
+  onAssist?: (assistantId: string, text: string, instruction: string, { onOpen, onMessage, onDone, onError, }: { onOpen?: () => void; onMessage: (msg: string) => void; onDone?: () => void; onError?: (err: any) => void; }) => Promise<void>;
 }

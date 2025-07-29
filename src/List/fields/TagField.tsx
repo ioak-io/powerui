@@ -5,7 +5,7 @@ import { SvgIcon } from 'basicui';
 import { FieldComponentProps } from '../FieldComponentProps';
 import { getClassName } from '../../utils/ClassNameUtils';
 
-const BASE_CLASS = 'powerui-cf-tagfield';
+const BASE_CLASS = 'powerui-list-tagfield';
 
 const TagField: React.FC<FieldComponentProps> = ({
     field,

@@ -9,6 +9,7 @@ import { isEmptyOrSpaces } from '../../../utils/Utils';
 import ReplyAction from '../chat/ReplyAction';
 import MessageSection from '../chat/MessageSection';
 import { requiredCheck } from './ValidationUtils';
+import Assistant from '../Assistant';
 
 const BASE_CLASS = "powerui-cf-textfield";
 
@@ -21,11 +22,16 @@ const TextField: React.FC<FieldComponentProps> = ({
     onStartEdit,
     onFinishEdit,
     onCancelEdit,
-    errorMap
+    errorMap,
+    onAssist
 }) => {
 
     const [errors, setErrors] = useState<string[]>([]);
     const [validationOutcome, setValidationOutcome] = useState<Record<string, boolean>>({});
+    const [pendingAssistant, setPendingAssistant] = useState<{
+        assistantId: string;
+        initialText: string;
+    }>()
 
     useEffect(() => {
         let _errors: string[] = [];
@@ -57,6 +63,15 @@ const TextField: React.FC<FieldComponentProps> = ({
         onFinishEdit();
     };
 
+    const handleAssist = () => {
+        if (field.assistant && onAssist) {
+            setPendingAssistant({
+                assistantId: field.assistant.id,
+                initialText: localValue
+            })
+        }
+    }
+
     const handleCancel = () => {
         setLocalValue(value || '');
         onCancelEdit();
@@ -68,47 +83,60 @@ const TextField: React.FC<FieldComponentProps> = ({
         }
     }
 
+    const handleAssistantApply = (e: string) => {
+        setLocalValue(e);
+        setPendingAssistant(undefined);
+    }
+
     return (
-        <ChatBubble
-            isEdit={editField === fieldPath}
-            onEdit={handleRequestEdit}
-            onCancel={onCancelEdit}
-            disabled={!!editField && editField !== fieldPath}
-        >
-            {editField !== fieldPath ? (
-                <>
-                    <span className={getClassName(BASE_CLASS, ["label"])}>{field.label} </span>
-                    {!isEmptyOrSpaces(value) && <span className={getClassName(BASE_CLASS, ["value"])}>{value}</span>}
-                </>
-            ) : (
-                <div className={getClassName(BASE_CLASS, ["edit"])}>
-                    <div className={getClassName(BASE_CLASS, ["edit", "prompt"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["prompt"]))}>
-                        {field.conversationalPrompt || `Enter ${prettify(fieldPath)}:`}
+        <>
+            <ChatBubble
+                isEdit={editField === fieldPath}
+                onEdit={handleRequestEdit}
+                onCancel={onCancelEdit}
+                disabled={!!editField && editField !== fieldPath}
+            >
+                {editField !== fieldPath ? (
+                    <>
+                        <span className={getClassName(BASE_CLASS, ["label"])}>{field.label} </span>
+                        {!isEmptyOrSpaces(value) && <span className={getClassName(BASE_CLASS, ["value"])}>{value}</span>}
+                    </>
+                ) : (
+                    <div className={getClassName(BASE_CLASS, ["edit"])}>
+                        <div className={getClassName(BASE_CLASS, ["edit", "prompt"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["prompt"]))}>
+                            {field.conversationalPrompt || `Enter ${prettify(fieldPath)}:`}
+                        </div>
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                handleSubmit();
+                            }}
+                            className={getClassName(BASE_CLASS, ["edit", "reply"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["reply"]))}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <input
+                                name={fieldPath}
+                                autoComplete="off"
+                                autoFocus
+                                type="text"
+                                value={localValue}
+                                placeholder={field.placeholder}
+                                className={getClassName(BASE_CLASS, ["edit", "reply", "input"], [])}
+                                onChange={(e) => setLocalValue(e.target.value)}
+                            />
+                        </form>
+                        <MessageSection errors={errors} validation={field.validation} validationOutcome={validationOutcome} />
+                        <ReplyAction onSave={handleSubmit} onCancel={handleCancel} onAssist={handleAssist} />
                     </div>
-                    <form
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            handleSubmit();
-                        }}
-                        className={getClassName(BASE_CLASS, ["edit", "reply"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["reply"]))}
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <input
-                            name={fieldPath}
-                            autoComplete="off"
-                            autoFocus
-                            type="text"
-                            value={localValue}
-                            placeholder={field.placeholder}
-                            className={getClassName(BASE_CLASS, ["edit", "reply", "input"], [])}
-                            onChange={(e) => setLocalValue(e.target.value)}
-                        />
-                    </form>
-                    <MessageSection errors={errors} validation={field.validation} validationOutcome={validationOutcome} />
-                    <ReplyAction onSave={handleSubmit} onCancel={handleCancel} />
-                </div>
-            )}
-        </ChatBubble>
+                )}
+            </ChatBubble>
+            {onAssist && <Assistant
+                pendingAction={pendingAssistant}
+                onAssist={onAssist}
+                onCancel={() => { setPendingAssistant(undefined) }}
+                onUpdate={handleAssistantApply}
+            />}
+        </>
     );
 };
 

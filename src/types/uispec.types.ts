@@ -52,6 +52,9 @@ export interface FormFieldSchema {
 
     conversationalPrompt?: string;
     fields?: FormFieldSchema[];
+    assistant?: {
+        id: string;
+    }
 }
 
 export interface FormAction {
