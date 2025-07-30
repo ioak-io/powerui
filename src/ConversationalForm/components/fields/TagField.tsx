@@ -6,6 +6,7 @@ import { BASE_CLASS_FIELD_RENDERER_SHARED } from '../FieldRenderer';
 import './TagField.css';
 import { SvgIcon } from 'basicui';
 import ReplyAction from '../chat/ReplyAction';
+import Question from '../chat/Question';
 
 const BASE_CLASS = 'powerui-cf-tagfield';
 
@@ -89,9 +90,8 @@ const TagField: React.FC<FieldComponentProps> = ({
                 </>
             ) : (
                 <div className={getClassName(BASE_CLASS, ['edit'])}>
-                    <div className={getClassName(BASE_CLASS, ['edit', 'prompt'], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ['prompt']))}>
-                        {field.conversationalPrompt || `Enter ${prettify(fieldPath)}:`}
-                    </div>
+                    <Question title={field.conversationalPrompt?.title || `Enter ${prettify(fieldPath)}:`}
+                        subtitle={field.conversationalPrompt?.subtitle} />
                     <div className={getClassName(BASE_CLASS, ['edit', 'reply'], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ['reply']))} onClick={(e) => e.stopPropagation()}>
                         <div className={getClassName(BASE_CLASS, ['edit', 'reply', "tags"], [])}>
                             <input

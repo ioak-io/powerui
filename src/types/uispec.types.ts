@@ -50,7 +50,10 @@ export interface FormFieldSchema {
         value?: any
     }[],
 
-    conversationalPrompt?: string;
+    conversationalPrompt?: {
+        title: string;
+        subtitle?: string;
+    };
     fields?: FormFieldSchema[];
     assistant?: {
         id: string;

@@ -53,7 +53,7 @@ const NestedChatForm: React.FC<NestedChatFormProps> = (props) => {
 
                 const labelMatch = field.label?.toLowerCase().includes(searchText.toLowerCase()) ?? false;
                 const nameMatch = field.name.toLowerCase().includes(searchText.toLowerCase());
-                const promptMatch = field.conversationalPrompt?.toLowerCase().includes(searchText.toLowerCase()) ?? false;
+                const promptMatch = field.conversationalPrompt?.title?.toLowerCase().includes(searchText.toLowerCase()) ?? false;
 
                 if (labelMatch || nameMatch || promptMatch) {
                     return field;

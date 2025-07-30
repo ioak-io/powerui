@@ -11,6 +11,7 @@ import MessageSection from '../chat/MessageSection';
 import { maxLengthCheck, minLengthCheck, patternCheck, requiredCheck } from './ValidationUtils';
 import { min } from 'date-fns';
 import Assistant from '../Assistant';
+import Question from '../chat/Question';
 
 const BASE_CLASS = "powerui-cf-textfield";
 
@@ -105,9 +106,8 @@ const TextField: React.FC<FieldComponentProps> = ({
                     </>
                 ) : (
                     <div className={getClassName(BASE_CLASS, ["edit"])}>
-                        <div className={getClassName(BASE_CLASS, ["edit", "prompt"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["prompt"]))}>
-                            {field.conversationalPrompt || `Enter ${prettify(fieldPath)}:`}
-                        </div>
+                        <Question title={field.conversationalPrompt?.title || `Enter ${prettify(fieldPath)}:`}
+                            subtitle={field.conversationalPrompt?.subtitle} />
                         <form
                             onSubmit={(e) => {
                                 e.preventDefault();
@@ -127,6 +127,9 @@ const TextField: React.FC<FieldComponentProps> = ({
                                 onChange={(e) => setLocalValue(e.target.value)}
                             />
                         </form>
+                        {/* <div className="small">
+                            Shift ⇧ + Enter ↵ to make a line break
+                        </div> */}
                         <MessageSection errors={errors} validation={field.validation} validationOutcome={validationOutcome} />
                         <ReplyAction onSave={handleSubmit} onCancel={handleCancel} onAssist={handleAssist} />
                     </div>

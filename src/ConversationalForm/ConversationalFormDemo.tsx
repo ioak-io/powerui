@@ -11,9 +11,10 @@ const userNameField: FormFieldSchema = {
   placeholder: "e.g., John Doe",
   validation: {
     required: true,
-    minLength: 2,
+    minLength: 10,
+    maxLength: 20
   },
-  conversationalPrompt: "What's your full name?",
+  conversationalPrompt: { title: "What's your full name?" },
 };
 
 const labelField: FormFieldSchema = {
@@ -25,7 +26,7 @@ const labelField: FormFieldSchema = {
     required: true,
     minLength: 2,
   },
-  conversationalPrompt: "Tag to labels",
+  conversationalPrompt: { title: "Tag to labels" },
 };
 
 const ageField: FormFieldSchema = {
@@ -38,7 +39,7 @@ const ageField: FormFieldSchema = {
     max: 120,
   },
   placeholder: "e.g., 21",
-  conversationalPrompt: "How old are you?"
+  conversationalPrompt: { title: "How old are you?" }
 };
 
 const genderField: FormFieldSchema = {
@@ -50,7 +51,7 @@ const genderField: FormFieldSchema = {
     { label: "Female", value: "female" },
     { label: "Other", value: "other" },
   ],
-  conversationalPrompt: "What’s your gender?",
+  conversationalPrompt: { title: "What’s your gender?" },
 };
 
 const contentSchema: FormFieldSchema = {
@@ -58,26 +59,26 @@ const contentSchema: FormFieldSchema = {
   type: "textarea",
   label: "Content",
   placeholder: "e.g., lorem ipsum dolor sit",
-  conversationalPrompt: "Describe in detail your primary subject matter",
+  conversationalPrompt: { title: "Describe in detail your primary subject matter" },
 };
 
 const addressSchema: FormFieldSchema = {
   name: "addresses",
   type: "array",
   label: "Addresses",
-  conversationalPrompt: "Can you provide your address details?",
+  conversationalPrompt: { title: "Can you provide your address details?" },
   fields: [
     {
       name: "street",
       type: "text",
       label: "Street",
-      conversationalPrompt: "What's the street name?",
+      conversationalPrompt: { title: "What's the street name?" },
     },
     {
       name: "city",
       type: "text",
       label: "City",
-      conversationalPrompt: "Which city is this in?",
+      conversationalPrompt: { title: "Which city is this in?" },
     },
     {
       name: "country",
@@ -91,7 +92,7 @@ const addressSchema: FormFieldSchema = {
         { label: "Canada", value: "ca" },
         { label: "UK", value: "uk" },
       ],
-      conversationalPrompt: "Which country is this address in?",
+      conversationalPrompt: { title: "Which country is this address in?" },
     },
     {
       name: "timezone",
@@ -103,13 +104,13 @@ const addressSchema: FormFieldSchema = {
           name: "utc",
           type: "text",
           label: "UTC value",
-          conversationalPrompt: "What's the value of UTC?",
+          conversationalPrompt: {title: "What's the value of UTC?"},
         },
         {
           name: "format",
           type: "text",
           label: "AM/PM",
-          conversationalPrompt: "Do you follow a 24 hour format or 12 hour format?",
+          conversationalPrompt: { title: "Do you follow a 24 hour format or 12 hour format?" },
         },
         {
           name: "holiday",
@@ -120,13 +121,13 @@ const addressSchema: FormFieldSchema = {
               name: "name",
               type: "text",
               label: "Holiday name",
-              conversationalPrompt: "What is the name of the holiday?",
+              conversationalPrompt: { title: "What is the name of the holiday?" },
             },
             {
               name: "halfday",
               type: "text",
               label: "Half or full day",
-              conversationalPrompt: "Is it a half day?",
+              conversationalPrompt: { title: "Is it a half day?" },
             }
           ]
         }
@@ -139,45 +140,42 @@ const productSchema: FormFieldSchema = {
   name: "product",
   type: "group",
   label: "Product",
-  conversationalPrompt: "Product prompt",
+  conversationalPrompt: { title: "Product prompt" },
   fields: [
     {
       name: "name",
       type: "text",
       label: "Product name",
-      conversationalPrompt: "What's the name of this product?",
-      placeholder: "Type a name for this product...",
-      validation: {
-        required: true,
-        minLength: 2,
-        maxLength: 20,
-      }
+      conversationalPrompt: {
+        title: "What's the name of this product?",
+        subtitle: "lorem ipsum subtitle text"
+      },
+      placeholder: "Type a name for this product..."
     },
     {
       name: "link",
       type: "text",
       label: "URL",
-      conversationalPrompt: "Do you have a product link? Provide the product link to do the connection.",
-      validation: {
-        pattern: "^[a-zA-Z0-9._%+-]+@westernacher\\.com$",
+      conversationalPrompt: {
+        title: "Do you have a product link? Provide the product link to do the connection."
       }
     },
     {
       name: "groupTest",
       type: "group",
       label: "Group test",
-      conversationalPrompt: "Group test prompt",
+      conversationalPrompt: { title: "Group test prompt" },
       fields: [
         {
           name: "objone",
           type: "text",
-          conversationalPrompt: "object one prompt",
+          conversationalPrompt: { title: "Object one prompt" },
           label: "Object one"
         },
         {
           name: "objtwo",
           type: "text",
-          conversationalPrompt: "object two prompt",
+          conversationalPrompt: { title: "Object two prompt" },
           label: "Object two"
         }
       ]
@@ -196,17 +194,17 @@ const fragmentSchema: FormSchema = {
     {
       name: 'title',
       type: 'text',
-      conversationalPrompt: 'What would you like to title this fragment?',
+      conversationalPrompt: { title: 'What would you like to title this fragment?' },
     },
     {
       name: 'description',
       type: 'textarea',
-      conversationalPrompt: 'Can you describe it briefly?',
+      conversationalPrompt: { title: 'Can you describe it briefly?' },
     },
     {
       name: 'labels',
       type: 'text',
-      conversationalPrompt: 'Any labels to tag this with?',
+      conversationalPrompt: { title: 'Any labels to tag this with?' },
     },
   ],
 }

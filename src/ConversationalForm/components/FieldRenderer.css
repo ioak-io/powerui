@@ -1,7 +1,13 @@
 .powerui-cf-fieldrenderer-shared__prompt {
-    margin-bottom: 0.5rem;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 300;
+}
+
+.powerui-cf-fieldrenderer-shared__prompt__subtitle {
+    font-size: 16px;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+    opacity: 0.5;
 }
 
 .powerui-cf-fieldrenderer-shared__reply {

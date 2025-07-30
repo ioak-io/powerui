@@ -6,6 +6,7 @@ import { Select, SvgIcon } from 'basicui';
 import { BASE_CLASS_FIELD_RENDERER_SHARED } from '../FieldRenderer';
 import './SelectField.css';
 import ReplyAction from '../chat/ReplyAction';
+import Question from '../chat/Question';
 
 const BASE_CLASS = "powerui-cf-selectfield";
 
@@ -77,8 +78,10 @@ const SelectField: React.FC<FieldComponentProps> = ({
             ) : (
                 <div className={getClassName(BASE_CLASS, ["edit"])}>
                     <div className={getClassName(BASE_CLASS, ["edit", "prompt"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["prompt"]))}>
-                        {field.conversationalPrompt || `Select ${prettify(fieldPath)}:`}
+                        {field.conversationalPrompt?.title || `Select ${prettify(fieldPath)}:`}
                     </div>
+                    <Question title={field.conversationalPrompt?.title || `Select ${prettify(fieldPath)}:`}
+                        subtitle={field.conversationalPrompt?.subtitle} />
                     <div className={getClassName(BASE_CLASS, ["edit", "reply"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["reply"]))} onClick={(e) => e.stopPropagation()}>
                         {field.multiple && <Select
                             multiple
