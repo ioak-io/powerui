@@ -146,13 +146,21 @@ const productSchema: FormFieldSchema = {
       type: "text",
       label: "Product name",
       conversationalPrompt: "What's the name of this product?",
-      placeholder: "Type a name for this product..."
+      placeholder: "Type a name for this product...",
+      validation: {
+        required: true,
+        minLength: 2,
+        maxLength: 20,
+      }
     },
     {
       name: "link",
       type: "text",
       label: "URL",
       conversationalPrompt: "Do you have a product link? Provide the product link to do the connection.",
+      validation: {
+        pattern: "^[a-zA-Z0-9._%+-]+@westernacher\\.com$",
+      }
     },
     {
       name: "groupTest",

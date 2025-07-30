@@ -8,7 +8,8 @@ import { SvgIcon } from 'basicui';
 import { isEmptyOrSpaces } from '../../../utils/Utils';
 import ReplyAction from '../chat/ReplyAction';
 import MessageSection from '../chat/MessageSection';
-import { requiredCheck } from './ValidationUtils';
+import { maxLengthCheck, minLengthCheck, patternCheck, requiredCheck } from './ValidationUtils';
+import { min } from 'date-fns';
 import Assistant from '../Assistant';
 
 const BASE_CLASS = "powerui-cf-textfield";
@@ -51,9 +52,10 @@ const TextField: React.FC<FieldComponentProps> = ({
         const _validationOutcome: Record<string, boolean> = {}
 
         _validationOutcome.required = requiredCheck(field.validation, localValue);
+        _validationOutcome.minLength = minLengthCheck(field.validation, localValue);
+        _validationOutcome.maxLength = maxLengthCheck(field.validation, localValue);
+        _validationOutcome.pattern = patternCheck(field.validation, localValue);
         // other checks for minLength and maxLength
-
-        console.log(localValue, _validationOutcome.required);
 
         setValidationOutcome(_validationOutcome);
     }, [field, localValue]);
