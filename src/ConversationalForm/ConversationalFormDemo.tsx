@@ -10,9 +10,12 @@ const userNameField: FormFieldSchema = {
   label: "Full Name",
   placeholder: "e.g., John Doe",
   validation: {
-    required: { condition: true, message: "This field is mandatory" },
-    minLength: { condition: 10, message: "Should be more than 10 characters" },
-    maxLength: { condition: 20, message: "Should be less than 20 characters" }
+    // required: { condition: true, message: "Custom message from demo" },
+    // minLength: { condition: 10, message: "Custom message from demo" },
+    // maxLength: { condition: 20, message: "Custom message from demo" }
+    required: { condition: true },
+    minLength: { condition: 10 },
+    maxLength: { condition: 20 }
   },
   conversationalPrompt: { title: "What's your full name?" },
 };
