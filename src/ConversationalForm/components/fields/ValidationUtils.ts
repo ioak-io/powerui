@@ -1,32 +1,47 @@
 import { FieldValidation } from "../../../types/uispec.types";
 import { isEmptyOrSpaces } from "../../../utils/Utils";
 
-export const requiredCheck = (validationSpec: FieldValidation | undefined, value: string | number) => {
-    if (!validationSpec || !validationSpec.required || !isEmptyOrSpaces(value)) return false;
-    return true;
+export interface ValidationOutcome {
+    outcome: boolean;
+    message?: string;
+}
+
+export const requiredCheck = (validationSpec: FieldValidation | undefined, value: string | number): ValidationOutcome => {
+    if (!validationSpec || !validationSpec.required || !isEmptyOrSpaces(value)) return {
+        outcome: false
+    };
+    return { outcome: true, message: validationSpec.required.message }
 };
 
-export const minLengthCheck = (validationSpec: FieldValidation | undefined, value: string) => {
-    if (validationSpec?.minLength !== undefined && value.length < validationSpec.minLength) {
-        return true;
+export const minLengthCheck = (validationSpec: FieldValidation | undefined, value: string): ValidationOutcome => {
+    if (!!validationSpec?.minLength?.condition && value.length < validationSpec.minLength.condition) {
+        return { outcome: true, message: validationSpec.minLength.message }
     } else {
-        return false;
+        return {
+            outcome: false
+        }
     }
 };
 
-export const maxLengthCheck = (validationSpec: FieldValidation | undefined, value: string) => {
-    if (validationSpec?.maxLength !== undefined && value.length > validationSpec.maxLength) {
-        return true;
+export const maxLengthCheck = (validationSpec: FieldValidation | undefined, value: string): ValidationOutcome => {
+    if (!!validationSpec?.maxLength?.condition && value.length > validationSpec.maxLength.condition) {
+        return { outcome: true, message: validationSpec.maxLength.message }
     } else {
-        return false;
+        return { outcome: false }
     }
 };
 
-export const patternCheck = (validationSpec: FieldValidation | undefined, value: string ): boolean => {
-    if (!validationSpec?.pattern) return false; 
-    const regex = new RegExp(validationSpec.pattern);
-    if(!regex.test(value)) {
-        return true;
+export const patternCheck = (validationSpec: FieldValidation | undefined, value: string): ValidationOutcome => {
+    if (!validationSpec?.pattern?.condition) {
+        return {
+            outcome: false
+        }
     }
-    return false;
+    const regex = new RegExp(validationSpec.pattern.condition);
+    if (!regex.test(value)) {
+        return { outcome: true, message: validationSpec.pattern.message }
+    }
+    return {
+        outcome: false
+    }
 };

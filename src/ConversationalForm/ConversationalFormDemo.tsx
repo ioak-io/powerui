@@ -10,9 +10,9 @@ const userNameField: FormFieldSchema = {
   label: "Full Name",
   placeholder: "e.g., John Doe",
   validation: {
-    required: true,
-    minLength: 10,
-    maxLength: 20
+    required: { condition: true, message: "This field is mandatory" },
+    minLength: { condition: 10, message: "Should be more than 10 characters" },
+    maxLength: { condition: 20, message: "Should be less than 20 characters" }
   },
   conversationalPrompt: { title: "What's your full name?" },
 };
@@ -23,8 +23,8 @@ const labelField: FormFieldSchema = {
   label: "Labels",
   placeholder: "placeholder for labels",
   validation: {
-    required: true,
-    minLength: 2,
+    required: { condition: true },
+    minLength: { condition: 2 },
   },
   conversationalPrompt: { title: "Tag to labels" },
 };
@@ -34,9 +34,9 @@ const ageField: FormFieldSchema = {
   type: "number",
   label: "Age",
   validation: {
-    required: true,
-    min: 0,
-    max: 120,
+    required: { condition: true },
+    min: { condition: 10 },
+    max: { condition: 120 },
   },
   placeholder: "e.g., 21",
   conversationalPrompt: { title: "How old are you?" }
@@ -104,7 +104,7 @@ const addressSchema: FormFieldSchema = {
           name: "utc",
           type: "text",
           label: "UTC value",
-          conversationalPrompt: {title: "What's the value of UTC?"},
+          conversationalPrompt: { title: "What's the value of UTC?" },
         },
         {
           name: "format",

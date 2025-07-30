@@ -8,7 +8,7 @@ import { SvgIcon } from 'basicui';
 import { isEmptyOrSpaces } from '../../../utils/Utils';
 import ReplyAction from '../chat/ReplyAction';
 import MessageSection from '../chat/MessageSection';
-import { maxLengthCheck, minLengthCheck, patternCheck, requiredCheck } from './ValidationUtils';
+import { maxLengthCheck, minLengthCheck, patternCheck, requiredCheck, ValidationOutcome } from './ValidationUtils';
 import { min } from 'date-fns';
 import Assistant from '../Assistant';
 import Question from '../chat/Question';
@@ -29,7 +29,7 @@ const TextField: React.FC<FieldComponentProps> = ({
 }) => {
 
     const [errors, setErrors] = useState<string[]>([]);
-    const [validationOutcome, setValidationOutcome] = useState<Record<string, boolean>>({});
+    const [validationOutcome, setValidationOutcome] = useState<Record<string, ValidationOutcome>>({});
     const [pendingAssistant, setPendingAssistant] = useState<{
         assistantId: string;
         initialText: string;
@@ -50,7 +50,7 @@ const TextField: React.FC<FieldComponentProps> = ({
     }, [value])
 
     useEffect(() => {
-        const _validationOutcome: Record<string, boolean> = {}
+        const _validationOutcome: Record<string, ValidationOutcome> = {}
 
         _validationOutcome.required = requiredCheck(field.validation, localValue);
         _validationOutcome.minLength = minLengthCheck(field.validation, localValue);
