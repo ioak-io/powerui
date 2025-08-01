@@ -153,7 +153,12 @@ const productSchema: FormFieldSchema = {
         title: "What's the name of this product?",
         subtitle: "lorem ipsum subtitle text"
       },
-      placeholder: "Type a name for this product..."
+      placeholder: "Type a name for this product...",
+      validation: {
+        required: { condition: true, message: "Product name is required" },
+        minLength: { condition: 5 },
+        maxLength: { condition: 10, message: "Product name cannot exceed 100 characters" }
+      }
     },
     {
       name: "link",
@@ -161,6 +166,10 @@ const productSchema: FormFieldSchema = {
       label: "URL",
       conversationalPrompt: {
         title: "Do you have a product link? Provide the product link to do the connection."
+      },
+      validation: {
+        required: { condition: true },
+        pattern: { condition: '^(https?://)?([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?$', message: "Invalid URL format(e.g, https://www.wikipedia.com)" }
       }
     },
     {

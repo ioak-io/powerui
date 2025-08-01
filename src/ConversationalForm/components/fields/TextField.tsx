@@ -33,7 +33,9 @@ const TextField: React.FC<FieldComponentProps> = ({
     const [pendingAssistant, setPendingAssistant] = useState<{
         assistantId: string;
         initialText: string;
-    }>()
+    }>();
+    const [passed, setPassed] = useState(true);
+    const [dirty, setDirty] = useState(false);
 
     useEffect(() => {
         let _errors: string[] = [];
@@ -50,16 +52,27 @@ const TextField: React.FC<FieldComponentProps> = ({
     }, [value])
 
     useEffect(() => {
+        if(!dirty) return;
+
         const _validationOutcome: Record<string, ValidationOutcome> = {}
 
         _validationOutcome.required = requiredCheck(field.validation, localValue);
         _validationOutcome.minLength = minLengthCheck(field.validation, localValue);
         _validationOutcome.maxLength = maxLengthCheck(field.validation, localValue);
         _validationOutcome.pattern = patternCheck(field.validation, localValue);
-        // other checks for minLength and maxLength
+        
+        const allValidationsPassed = Object.values(_validationOutcome).every(
+            validation => validation?.outcome !== true
+        );
 
+        setPassed(allValidationsPassed);
         setValidationOutcome(_validationOutcome);
-    }, [field, localValue]);
+    }, [field, localValue, dirty]);
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!dirty) setDirty(true);
+        setLocalValue(e.target.value);
+    };
 
     const handleSubmit = () => {
         onChange(localValue);
@@ -124,13 +137,13 @@ const TextField: React.FC<FieldComponentProps> = ({
                                 value={localValue}
                                 placeholder={field.placeholder}
                                 className={getClassName(BASE_CLASS, ["edit", "reply", "input"], [])}
-                                onChange={(e) => setLocalValue(e.target.value)}
+                                onChange={handleInputChange}
                             />
                         </form>
                         {/* <div className="small">
                             Shift ⇧ + Enter ↵ to make a line break
                         </div> */}
-                        <MessageSection errors={errors} validation={field.validation} validationOutcome={validationOutcome} />
+                        <MessageSection errors={errors} validation={field.validation} validationOutcome={validationOutcome} passed={passed} dirty={dirty}/>
                         <ReplyAction onSave={handleSubmit} onCancel={handleCancel} onAssist={handleAssist} />
                     </div>
                 )}
