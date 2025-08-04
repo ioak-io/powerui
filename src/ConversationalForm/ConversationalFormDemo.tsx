@@ -9,14 +9,11 @@ const userNameField: FormFieldSchema = {
   type: "text",
   label: "Full Name",
   placeholder: "e.g., John Doe",
-  validation: {
-    // required: { condition: true, message: "Custom message from demo" },
-    // minLength: { condition: 10, message: "Custom message from demo" },
-    // maxLength: { condition: 20, message: "Custom message from demo" }
-    required: { condition: true },
-    minLength: { condition: 10 },
-    maxLength: { condition: 20 }
-  },
+  validation: [
+    { required: { condition: true } },
+    { minLength: { condition: 10 } },
+    { maxLength: { condition: 20 } }
+  ],
   conversationalPrompt: { title: "What's your full name?" },
 };
 
@@ -25,10 +22,10 @@ const labelField: FormFieldSchema = {
   type: "tag",
   label: "Labels",
   placeholder: "placeholder for labels",
-  validation: {
-    required: { condition: true },
-    minLength: { condition: 2 },
-  },
+  validation: [
+    { required: { condition: true } },
+    { minLength: { condition: 2 } }
+  ],
   conversationalPrompt: { title: "Tag to labels" },
 };
 
@@ -36,11 +33,11 @@ const ageField: FormFieldSchema = {
   name: "age",
   type: "number",
   label: "Age",
-  validation: {
-    required: { condition: true },
-    min: { condition: 10 },
-    max: { condition: 120 },
-  },
+  validation: [
+    { required: { condition: true } },
+    { min: { condition: 10 } },
+    { max: { condition: 120 } },
+  ],
   placeholder: "e.g., 21",
   conversationalPrompt: { title: "How old are you?" }
 };
@@ -154,11 +151,11 @@ const productSchema: FormFieldSchema = {
         subtitle: "lorem ipsum subtitle text"
       },
       placeholder: "Type a name for this product...",
-      validation: {
-        required: { condition: true, message: "Product name is required" },
-        minLength: { condition: 5 },
-        maxLength: { condition: 10, message: "Product name cannot exceed 100 characters" }
-      }
+      validation: [
+        { type: "required", messageTemplate: "Product name is required" },
+        { type: "min", expected: 5 },
+        { type: "max", expected: 10, messageTemplate: "Product name cannot exceed 100 characters" },
+      ]
     },
     {
       name: "link",
@@ -167,10 +164,10 @@ const productSchema: FormFieldSchema = {
       conversationalPrompt: {
         title: "Do you have a product link? Provide the product link to do the connection."
       },
-      validation: {
-        required: { condition: true },
-        pattern: { condition: '^(https?://)?([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?$', message: "Invalid URL format(e.g, https://www.wikipedia.com)" }
-      }
+      validation: [
+        { required: { condition: true } },
+        { pattern: { condition: '^(https?://)?([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?$', message: "Invalid URL format(e.g, https://www.wikipedia.com)" } }
+      ]
     },
     {
       name: "groupTest",

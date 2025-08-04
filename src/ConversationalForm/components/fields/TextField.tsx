@@ -8,7 +8,7 @@ import { SvgIcon } from 'basicui';
 import { isEmptyOrSpaces } from '../../../utils/Utils';
 import ReplyAction from '../chat/ReplyAction';
 import MessageSection from '../chat/MessageSection';
-import { maxLengthCheck, minLengthCheck, patternCheck, requiredCheck, ValidationOutcome } from './ValidationUtils';
+import { maxLengthCheck, minLengthCheck, patternCheck, requiredCheck, validateFormElement, ValidationOutcome } from './ValidationUtils';
 import { min } from 'date-fns';
 import Assistant from '../Assistant';
 import Question from '../chat/Question';
@@ -29,12 +29,11 @@ const TextField: React.FC<FieldComponentProps> = ({
 }) => {
 
     const [errors, setErrors] = useState<string[]>([]);
-    const [validationOutcome, setValidationOutcome] = useState<Record<string, ValidationOutcome>>({});
+    const [validationOutcome, setValidationOutcome] = useState<ValidationOutcome[]>([]);
     const [pendingAssistant, setPendingAssistant] = useState<{
         assistantId: string;
         initialText: string;
     }>();
-    const [passed, setPassed] = useState(true);
     const [dirty, setDirty] = useState(false);
 
     useEffect(() => {
@@ -52,21 +51,9 @@ const TextField: React.FC<FieldComponentProps> = ({
     }, [value])
 
     useEffect(() => {
-        if(!dirty) return;
+        if (!dirty) return;
 
-        const _validationOutcome: Record<string, ValidationOutcome> = {}
-
-        _validationOutcome.required = requiredCheck(field.validation, localValue);
-        _validationOutcome.minLength = minLengthCheck(field.validation, localValue);
-        _validationOutcome.maxLength = maxLengthCheck(field.validation, localValue);
-        _validationOutcome.pattern = patternCheck(field.validation, localValue);
-        
-        const allValidationsPassed = Object.values(_validationOutcome).every(
-            validation => validation?.outcome !== true
-        );
-
-        setPassed(allValidationsPassed);
-        setValidationOutcome(_validationOutcome);
+        setValidationOutcome(validateFormElement(field.validation, localValue));
     }, [field, localValue, dirty]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -143,7 +130,7 @@ const TextField: React.FC<FieldComponentProps> = ({
                         {/* <div className="small">
                             Shift ⇧ + Enter ↵ to make a line break
                         </div> */}
-                        <MessageSection errors={errors} validation={field.validation} validationOutcome={validationOutcome} passed={passed} dirty={dirty}/>
+                        <MessageSection errors={errors} validation={field.validation} validationOutcome={validationOutcome} dirty={dirty} />
                         <ReplyAction onSave={handleSubmit} onCancel={handleCancel} onAssist={handleAssist} />
                     </div>
                 )}
