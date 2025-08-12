@@ -1,7 +1,0 @@
-.powerui-divider {
-    background-color: var(--powerui-border-color);
-    width: 1px;
-    height: 24px;
-    display: flex;
-    align-self: center;
-}

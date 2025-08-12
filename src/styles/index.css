@@ -1,7 +1,23 @@
-@import './theme/index.css';
-@import './table.css';
-@import './variables/index.css';
-@import './common.css';
-@import './dynamicform.css';
-@import './list.css';
-@import './searchbar.css';
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #f0f8ff;
+--color-primary-100: #e1effd;
+--color-primary-200: #bbe0fc;
+--color-primary-300: #80c6f9;
+--color-primary-400: #3ca9f4;
+--color-primary-500: #138fe4;
+--color-primary-600: #077bd5;
+--color-primary-700: #07599d;
+--color-primary-800: #0a4c82;
+--color-primary-900: #0e406c;
+--color-primary-950: #092948;
+
+  --radius-xl: 1rem;
+}
+
+.dark {
+}
+
+.light {
+}
