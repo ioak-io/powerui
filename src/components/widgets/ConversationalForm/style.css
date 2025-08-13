@@ -18,12 +18,12 @@
 }
 
 .powerui-cf__actionheader__search input {
-  padding: 12px;
+  /* padding: 12px;
   border: 1px solid var(--basicui-border-color);
   border-radius: 12px;
   width: 240px;
   background-color: var(--basicui-bg-card);
   background-color: transparent;
   color: var(--basicui-fg);
-  outline: none;
+  outline: none; */
 }

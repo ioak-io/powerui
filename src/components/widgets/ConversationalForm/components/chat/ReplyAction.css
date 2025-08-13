@@ -1,4 +1,4 @@
-.powerui-cf-replyaction {
+/* .powerui-cf-replyaction {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,9 +23,7 @@
 }
 
 .powerui-cf-replyaction__left__assist {
-    /* background-color: var(--basicui-bg-warning); */
     color: var(--basicui-bg-primary);
-    /* border: 1px solid var(--basicui-border-color); */
     padding: 6px 6px;
     border-radius: 4px;
 }
@@ -35,7 +33,6 @@
 }
 
 .powerui-cf-replyaction__cancel {
-    /* border: 1px solid var(--basicui-fg); */
     color: var(--basicui-fg);
     opacity: 0.4;
     padding: 6px 6px;
@@ -44,4 +41,4 @@
 
 .powerui-cf-replyaction__cancel svg {
     fill: var(--basicui-fg);
-}
+} */

@@ -85,13 +85,13 @@ const ChatBubble: React.FC<ChatBubbleProps> = (props) => {
         "border",
         "border-dotted",
         "border-gray-200",
-        "dark:border-neutral-800", // fallback for --powerui-cf-border-color
+        "dark:border-neutral-700", // fallback for --powerui-cf-border-color
         "transition-colors",
         "duration-250",
         "ease-in-out",
         "select-text", // so text can be selected
         "bg-gray-100", // fallback for var(--powerui-cf-bg-field)
-        "dark:bg-neutral-800", // fallback for var(--powerui-cf-bg-field)
+        "dark:bg-neutral-900", // fallback for var(--powerui-cf-bg-field)
     ];
 
     const editingClasses = [

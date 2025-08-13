@@ -3,6 +3,7 @@ import FieldRenderer from './components/FieldRenderer';
 import './style.css';
 import { getClassName } from '../../../lib/utils/ClassNameUtils';
 import { FormFieldSchema, FormSchema } from '../../../types/uispec.types';
+import { Input } from '@/components/ui-library/input';
 
 interface NestedChatFormProps {
     schema: FormSchema;
@@ -141,7 +142,7 @@ const NestedChatForm: React.FC<NestedChatFormProps> = (props) => {
             <div className={getClassName(BASE_CLASS)}>
                 <div className={getClassName(BASE_CLASS, ["actionheader"])}>
                     <div className={getClassName(BASE_CLASS, ["actionheader", "search"])}>
-                        <input
+                        <Input
                             autoFocus
                             type="text"
                             placeholder="Search fields..."

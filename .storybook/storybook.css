@@ -1,9 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 @import "tailwindcss";
 
 body {
   @apply bg-neutral-50;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Geist", sans-serif;
+  font-optical-sizing: auto;
 }
 .dark body {
   @apply bg-neutral-950;
