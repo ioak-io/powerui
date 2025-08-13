@@ -20,6 +20,8 @@ interface ArrayFieldProps {
 
 const BASE_CLASS = "powerui-cf-arrayfield";
 
+const ROOT_CLASS = "p-3.5 rounded-lg odd:bg-neutral-200 even:bg-neutral-200/70 dark:odd:bg-neutral-700 dark:even:bg-neutral-700/60 rounded-lg"
+
 const ArrayField: React.FC<ArrayFieldProps> = (props) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -54,7 +56,8 @@ const ArrayField: React.FC<ArrayFieldProps> = (props) => {
     // }, [props.editField, props.fieldPath])
 
     return (
-        <div className={getClassName(BASE_CLASS, [], props.isEven ? ["even"] : [])}>
+        // <div className={getClassName(BASE_CLASS, [], props.isEven ? ["even"] : [])}>
+        <div className={ROOT_CLASS}>
             <div className={getClassName(BASE_CLASS, ["header"], (!!props.editField && props.editField !== props.fieldPath) ? ["disabled"] : [])}>
                 <h6>{prettify(`${props.fieldPath}`)}</h6>
                 <Button

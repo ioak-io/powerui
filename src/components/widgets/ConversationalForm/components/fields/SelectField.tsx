@@ -6,6 +6,8 @@ import './SelectField.css';
 import ReplyAction from '../chat/ReplyAction';
 import Question from '../chat/Question';
 import { getClassName } from '../../../../../lib/utils/ClassNameUtils';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui-library/select';
+import { stringToValue, valueToString } from '@/lib/utils';
 
 const BASE_CLASS = "powerui-cf-selectfield";
 
@@ -32,11 +34,7 @@ const SelectField: React.FC<FieldComponentProps> = ({
     };
 
     const handleChange = (e: any) => {
-        if (field.multiple) {
-            setLocalValues(e.currentTarget.values || []);
-        } else {
-            setLocalValue(e.currentTarget.value);
-        }
+        setLocalValue(stringToValue(e));
     };
 
     const _reset = () => {
@@ -73,15 +71,13 @@ const SelectField: React.FC<FieldComponentProps> = ({
                             field.options?.find((opt: any) => opt.value === val)?.label || val
                         ).join(', ') || ''}
                     </span>}
+                    {value}
                 </>
             ) : (
                 <div className={getClassName(BASE_CLASS, ["edit"])}>
-                    <div className={getClassName(BASE_CLASS, ["edit", "prompt"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["prompt"]))}>
-                        {field.conversationalPrompt?.title || `Select ${prettify(fieldPath)}:`}
-                    </div>
                     <Question title={field.conversationalPrompt?.title || `Select ${prettify(fieldPath)}:`}
                         subtitle={field.conversationalPrompt?.subtitle} />
-                    <div className={getClassName(BASE_CLASS, ["edit", "reply"], [], getClassName(BASE_CLASS_FIELD_RENDERER_SHARED, ["reply"]))} onClick={(e) => e.stopPropagation()}>
+                    <div onClick={(e) => e.stopPropagation()}>
                         {/* {field.multiple && <Select
                             multiple
                             autocomplete={field.options && field.options?.length > 4}
@@ -95,7 +91,21 @@ const SelectField: React.FC<FieldComponentProps> = ({
                             options={field.options || []}
                             onChange={handleChange}
                         />} */}
-                        combobox
+                        <Select
+                            value={value}
+                            onValueChange={handleChange}>
+                            <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Select a value" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectLabel>Fruits</SelectLabel>
+                                    {field.options?.map(item => (
+                                        <SelectItem value={valueToString(item.value)}>{item.label}</SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
                     </div>
                     <ReplyAction onSave={handleSubmit} onCancel={handleCancel} />
                 </div>
