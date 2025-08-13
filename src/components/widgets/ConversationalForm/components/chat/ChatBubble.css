@@ -1,0 +1,25 @@
+.powerui-cf-chatbubble {
+  background-color: var(--powerui-cf-bg-field);
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  opacity: 1;
+  transition: background-color 250ms ease-in-out, color 250ms ease-in-out, opacity 500ms ease-in-out, 250ms ease-in-out;
+  border: 1px dotted var(--powerui-cf-border-color);
+  /* border-left: 4px solid var(--basicui-bg-primary); */
+}
+
+.powerui-cf-chatbubble--editing {
+  /* border-color: var(--basicui-bg-primary); */
+}
+
+.powerui-cf-chatbubble--not-editing {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  cursor: default;
+  row-gap: 6px;
+}
+
+.powerui-cf-chatbubble--disabled {
+  opacity: 0.25;
+}

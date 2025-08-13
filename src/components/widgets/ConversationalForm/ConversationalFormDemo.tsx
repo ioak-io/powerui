@@ -1,0 +1,274 @@
+import React, { useRef, useState } from 'react';
+import ConversationalForm from '.';
+import './ConversationalFormDemo.css';
+import { FormFieldSchema, FormSchema } from '../../../types/uispec.types';
+import { Button } from '@/components/ui-library/button';
+import SvgIcon from '@/components/shared/SvgIcon';
+
+const userNameField: FormFieldSchema = {
+  name: "fullName",
+  type: "text",
+  label: "Full Name",
+  placeholder: "e.g., John Doe",
+  validation: [
+    { type: "required" },
+    { type: "min", expected: 10 },
+    { type: "max", expected: 25 }
+  ],
+  conversationalPrompt: { title: "What's your full name?" },
+};
+
+const labelField: FormFieldSchema = {
+  name: "labels",
+  type: "tag",
+  label: "Labels",
+  placeholder: "placeholder for labels",
+  validation: [
+  ],
+  conversationalPrompt: { title: "Tag to labels" },
+};
+
+const ageField: FormFieldSchema = {
+  name: "age",
+  type: "number",
+  label: "Age",
+  validation: [
+  ],
+  placeholder: "e.g., 21",
+  conversationalPrompt: { title: "How old are you?" }
+};
+
+const genderField: FormFieldSchema = {
+  name: "gender",
+  type: "select",
+  label: "Gender",
+  options: [
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+    { label: "Other", value: "other" },
+  ],
+  conversationalPrompt: { title: "What’s your gender?" },
+};
+
+const contentSchema: FormFieldSchema = {
+  name: "content",
+  type: "textarea",
+  label: "Content",
+  placeholder: "e.g., lorem ipsum dolor sit",
+  conversationalPrompt: { title: "Describe in detail your primary subject matter" },
+};
+
+const addressSchema: FormFieldSchema = {
+  name: "addresses",
+  type: "array",
+  label: "Addresses",
+  conversationalPrompt: { title: "Can you provide your address details?" },
+  fields: [
+    {
+      name: "street",
+      type: "text",
+      label: "Street",
+      conversationalPrompt: { title: "What's the street name?" },
+    },
+    {
+      name: "city",
+      type: "text",
+      label: "City",
+      conversationalPrompt: { title: "Which city is this in?" },
+    },
+    {
+      name: "country",
+      type: "select",
+      label: "Country",
+      multiple: true,
+      options: [
+        { label: "USA", value: "us" },
+        { label: "Canada", value: "ca" },
+        { label: "UK", value: "uk" },
+        { label: "Canada", value: "ca" },
+        { label: "UK", value: "uk" },
+      ],
+      conversationalPrompt: { title: "Which country is this address in?" },
+    },
+    {
+      name: "timezone",
+      type: "group",
+      label: "Timezone",
+      fields: [
+
+        {
+          name: "utc",
+          type: "text",
+          label: "UTC value",
+          conversationalPrompt: { title: "What's the value of UTC?" },
+        },
+        {
+          name: "format",
+          type: "text",
+          label: "AM/PM",
+          conversationalPrompt: { title: "Do you follow a 24 hour format or 12 hour format?" },
+        },
+        {
+          name: "holiday",
+          type: "array",
+          label: "Holiday",
+          fields: [
+            {
+              name: "name",
+              type: "text",
+              label: "Holiday name",
+              conversationalPrompt: { title: "What is the name of the holiday?" },
+            },
+            {
+              name: "halfday",
+              type: "text",
+              label: "Half or full day",
+              conversationalPrompt: { title: "Is it a half day?" },
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+const productSchema: FormFieldSchema = {
+  name: "product",
+  type: "group",
+  label: "Product",
+  conversationalPrompt: { title: "Product prompt" },
+  fields: [
+    {
+      name: "name",
+      type: "text",
+      label: "Product name",
+      conversationalPrompt: {
+        title: "What's the name of this product?",
+        subtitle: "lorem ipsum subtitle text"
+      },
+      placeholder: "Type a name for this product...",
+      validation: [
+        { type: "required", messageTemplate: "Product name is required" },
+        { type: "min", expected: 5 },
+        { type: "max", expected: 10, messageTemplate: "Product name cannot exceed 100 characters" },
+      ]
+    },
+    {
+      name: "link",
+      type: "text",
+      label: "URL",
+      conversationalPrompt: {
+        title: "Do you have a product link? Provide the product link to do the connection."
+      },
+      validation: [
+        { type: "pattern", expected: '^(https?://)?([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?$', messageTemplate: "Invalid URL format(e.g, https://www.wikipedia.com)" }
+      ]
+    },
+    {
+      name: "groupTest",
+      type: "group",
+      label: "Group test",
+      conversationalPrompt: { title: "Group test prompt" },
+      fields: [
+        {
+          name: "objone",
+          type: "text",
+          conversationalPrompt: { title: "Object one prompt" },
+          label: "Object one"
+        },
+        {
+          name: "objtwo",
+          type: "text",
+          conversationalPrompt: { title: "Object two prompt" },
+          label: "Object two"
+        }
+      ]
+    }
+  ]
+}
+
+const schema: FormSchema = {
+  fields: [
+    genderField, labelField, productSchema, contentSchema, addressSchema, ageField, userNameField
+  ]
+}
+
+const fragmentSchema: FormSchema = {
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      conversationalPrompt: { title: 'What would you like to title this fragment?' },
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+      conversationalPrompt: { title: 'Can you describe it briefly?' },
+    },
+    {
+      name: 'labels',
+      type: 'text',
+      conversationalPrompt: { title: 'Any labels to tag this with?' },
+    },
+  ],
+}
+
+const ConversationalFormDemo = () => {
+  const [formData, setFormData] = useState<Record<string, any>>({
+    age: 20,
+    addresses: [
+      { street: "lorem ipsum" }
+    ],
+    labels: [
+      {
+        value: "lorem",
+        id: "1",
+      },
+      {
+        value: "ipsum",
+        id: 2,
+      },
+      {
+        value: "dolor"
+      }
+    ]
+  });
+  const handleChange = (_formData: Record<string, any>) => {
+    console.log(_formData);
+    setFormData(_formData);
+  }
+
+  const actions = <>
+    <Button onClick={() => { }}>
+        <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" /></svg>
+      Save
+    </Button>
+    <Button onClick={() => { }} size="icon">
+      <SvgIcon height="16px" width="16px">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path d="M242.7 256L345.6 153.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L197.3 210.7 94.6 108.1c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L152.7 256 49.4 359.6c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L197.3 301.3l102.7 102.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L242.7 256z" /></svg>
+      </SvgIcon>
+    </Button>
+    <Button onClick={() => { }}>
+      {/* <SvgIcon height="16px" width="16px"> */}
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M142.9 142.9c-17.5 17.5-30.1 38-37.8 59.8c-5.9 16.7-24.2 25.4-40.8 19.5s-25.4-24.2-19.5-40.8C55.6 150.7 73.2 122 97.6 97.6c87.2-87.2 228.3-87.5 315.8-1L455 55c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2l0 128c0 13.3-10.7 24-24 24l-8.4 0c0 0 0 0 0 0L344 224c-9.7 0-18.5-5.8-22.2-14.8s-1.7-19.3 5.2-26.2l41.1-41.1c-62.6-61.5-163.1-61.2-225.3 1zM16 312c0-13.3 10.7-24 24-24l7.6 0 .7 0L168 288c9.7 0 18.5 5.8 22.2 14.8s1.7 19.3-5.2 26.2l-41.1 41.1c62.6 61.5 163.1 61.2 225.3-1c17.5-17.5 30.1-38 37.8-59.8c5.9-16.7 24.2-25.4 40.8-19.5s25.4 24.2 19.5 40.8c-10.8 30.6-28.4 59.3-52.9 83.8c-87.2 87.2-228.3 87.5-315.8 1L57 457c-6.9 6.9-17.2 8.9-26.2 5.2S16 449.7 16 440l0-119.6 0-.7 0-7.6z" /></svg>
+      {/* </SvgIcon> */}
+    </Button>
+  </>
+
+  return (
+    <div className="conversational-form-demo">
+      <ConversationalForm
+        formData={formData}
+        onChange={handleChange}
+        schema={schema}
+        actions={actions}
+      // mode="create"
+      //   formData={formData}
+      //   onChange={handleChange}
+      //   schema={schema} onSubmit={(e) => { console.log(e) }} 
+      />
+    </div>
+  );
+};
+
+export default ConversationalFormDemo;

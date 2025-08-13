@@ -16,9 +16,11 @@
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "outDir": "dist",
-    "types": ["react", "react-dom"]
+    "types": ["react", "react-dom"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src", ".storybook"]
 }
-
-
