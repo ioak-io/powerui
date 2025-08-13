@@ -30,7 +30,7 @@ const GroupField: React.FC<GroupFieldProps> = (props) => {
         setIsCollapsed(!isCollapsed);
     };
 
-    const ROOT_CLASS = "p-3.5 rounded-lg odd:bg-neutral-200 even:bg-neutral-200/70 dark:odd:bg-neutral-700 dark:even:bg-neutral-700/60 rounded-lg"
+    const ROOT_CLASS = "p-3.5 rounded-lg odd:bg-muted-1 even:bg-muted-2"
 
     return (
         <div className={ROOT_CLASS}>

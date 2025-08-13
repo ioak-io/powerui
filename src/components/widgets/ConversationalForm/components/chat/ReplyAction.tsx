@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui-library/button';
+import Assistant from '../Assistant';
 
 interface ReplyActionProps {
     onSave: () => void;

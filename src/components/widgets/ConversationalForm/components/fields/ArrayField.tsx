@@ -20,7 +20,7 @@ interface ArrayFieldProps {
 
 const BASE_CLASS = "powerui-cf-arrayfield";
 
-const ROOT_CLASS = "p-3.5 rounded-lg odd:bg-neutral-200 even:bg-neutral-200/70 dark:odd:bg-neutral-700 dark:even:bg-neutral-700/60 rounded-lg"
+const ROOT_CLASS = "p-3.5 rounded-lg odd:bg-muted-1 even:bg-muted-2"
 
 const ArrayField: React.FC<ArrayFieldProps> = (props) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -62,17 +62,17 @@ const ArrayField: React.FC<ArrayFieldProps> = (props) => {
                 <h6>{prettify(`${props.fieldPath}`)}</h6>
                 <Button
                     onClick={toggleCollapse}
-                    className={getClassName(BASE_CLASS, ["collapse-button"], [], "basicui-clean-button")}
+                    variant="ghost"
                     aria-label={isCollapsed ? 'Expand section' : 'Collapse section'}
                 >
                     <SvgIcon height="12px" width="12px">
                         {isCollapsed ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                 {/* Plus Icon */}
                                 <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v112H80c-17.7 0-32 14.3-32 32s14.3 32 32 32h112v112c0 17.7 14.3 32 32 32s32-14.3 32-32V256h112c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
                             </svg>
                         ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                 {/* Minus Icon */}
                                 <path d="M416 208H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h384c17.7 0 32-14.3 32-32s-14.3-32-32-32z" />
                             </svg>
@@ -90,13 +90,10 @@ const ArrayField: React.FC<ArrayFieldProps> = (props) => {
                             </div>
                             <div className={getClassName(BASE_CLASS, ["fields", "header", "action"])}>
                                 <Button
-                                    className="bg-primary-600 hover:bg-primary-500 p-2"
                                     onClick={() => handleRemoveItem(index)}>
-                                    <SvgIcon height="12px" width="12px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                            <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96h384c17.7 0 32-14.3 32-32S433.7 32 416 32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32l21.2 339c1.6 25.3 22.6 45 47.9 45h245.8c25.3 0 46.3-19.7 47.9-45L416 128z" />
-                                        </svg>
-                                    </SvgIcon>
+                                    <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96h384c17.7 0 32-14.3 32-32S433.7 32 416 32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32l21.2 339c1.6 25.3 22.6 45 47.9 45h245.8c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                                    </svg>
                                     Remove
                                 </Button>
                             </div>
@@ -123,13 +120,10 @@ const ArrayField: React.FC<ArrayFieldProps> = (props) => {
                 <div className={getClassName(BASE_CLASS, ["actions"])}>
                     <div className="small">{(!props.value || props.value.length == 0) && "No data"}</div>
                     <Button
-                        onClick={handleAddItem}
-                        className="bg-primary-600 p-2">
-                        <SvgIcon height="12px" width="12px">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-                            </svg>
-                        </SvgIcon>
+                        onClick={handleAddItem}>
+                        <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                        </svg>
                         Add {props.field.label}
                     </Button>
                 </div>

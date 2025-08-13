@@ -10,4 +10,28 @@
   --color-primary-800: oklch(0.3853 0.0768 249.9263);
   --color-primary-900: oklch(0.3033 0.0499 251.7861);
   --color-primary-950: oklch(0.2197 0.0247 256.4587);
+  --color-muted-1: var(--muted-1);
+  --color-muted-2: var(--muted-2);
+  --color-muted-3: var(--muted-3);
+}
+
+:root {
+  --muted-1: color-mix(in oklch, var(--muted) 60%, white);
+  --muted-2: color-mix(in oklch, var(--muted) 40%, white);
+  --muted-3: color-mix(in oklch, var(--muted) 20%, white);
+}
+
+.dark {
+  --muted-1: color-mix(in oklch, var(--muted) 80%, white);
+  --muted-2: color-mix(in oklch, var(--muted) 85%, white);
+  --muted-3: color-mix(in oklch, var(--muted) 90%, white);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

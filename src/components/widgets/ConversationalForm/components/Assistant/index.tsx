@@ -1,8 +1,15 @@
 import React, { useState, useEffect, useRef, ReactNode } from "react";
 import "./style.css";
 import { copyHtmlToClipboard } from "../../../../../lib/utils/ClipboardUtils";
-import { getClassName } from "../../../../../lib/utils/ClassNameUtils";
-import SvgIcon from "../../../../shared/SvgIcon";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui-library/dialog"
+import { Button } from "@/components/ui-library/button";
 
 export type AssistantProps = {
     pendingAction?: {
@@ -117,7 +124,20 @@ const Assistant = (props: AssistantProps) => {
     }
 
     return (
-<></>
+        <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline">Share</Button>
+      </DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Are you absolutely sure?</DialogTitle>
+                    <DialogDescription>
+                        This action cannot be undone. This will permanently delete your account
+                        and remove your data from our servers.
+                    </DialogDescription>
+                </DialogHeader>
+            </DialogContent>
+        </Dialog>
         // <Dialog
         //     open={!!props.pendingAction}
         //     onClose={props.onCancel}
