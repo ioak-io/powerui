@@ -2,9 +2,9 @@ import React, { useRef, useState } from 'react';
 import ConversationalForm from '.';
 import './ConversationalFormDemo.css';
 import { FormFieldSchema, FormSchema } from '../../../types/uispec.types';
-import { Button } from '@/components/ui-library/button';
-import SvgIcon from '@/components/shared/SvgIcon';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui-library/dialog';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogBody, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
 
 const userNameField: FormFieldSchema = {
   name: "fullName",
@@ -290,60 +290,70 @@ const ConversationalFormDemo = () => {
         <DialogTrigger asChild>
           <Button variant="outline">Share</Button>
         </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
-            <DialogDescription className='max-h-[50vh] overflow-y-auto'>
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.qeweqw
+        <DialogContent showCloseButton>
+          <DialogHeader bordered>
+            <DialogTitle>Lorem ipsum</DialogTitle>
+            <DialogDescription>
+              Dolor sit lorem ipsum
+              Dolor sit lorem ipsum
             </DialogDescription>
           </DialogHeader>
+          <DialogBody>
+            <div>test</div>
+            <Input />
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.qeweqw
+          </DialogBody>
+          <DialogFooter bordered>
+            <Button>OK</Button>
+            <Button variant="outline">Cancel</Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

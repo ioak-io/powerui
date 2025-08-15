@@ -1,15 +1,9 @@
 import React, { useState, useEffect, useRef, ReactNode } from "react";
 import "./style.css";
 import { copyHtmlToClipboard } from "../../../../../lib/utils/ClipboardUtils";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui-library/dialog"
-import { Button } from "@/components/ui-library/button";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogBody, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 export type AssistantProps = {
     pendingAction?: {
@@ -125,17 +119,18 @@ const Assistant = (props: AssistantProps) => {
 
     return (
         <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Share</Button>
-      </DialogTrigger>
+            <DialogTrigger asChild>
+                <Button variant="outline">Share</Button>
+            </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Are you absolutely sure?</DialogTitle>
-                    <DialogDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
-                    </DialogDescription>
                 </DialogHeader>
+                <DialogBody>This action cannot be undone. This will permanently delete your account
+                    and remove your data from our servers.</DialogBody>
+                <DialogFooter>
+                    <Button variant="destructive">Proceed</Button>
+                </DialogFooter>
             </DialogContent>
         </Dialog>
         // <Dialog
