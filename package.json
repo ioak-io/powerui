@@ -20,9 +20,191 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.mjs"
+      "default": "./dist/index.js"
+    },
+    "./accordion": {
+      "types": "./dist/exports/accordion.d.ts",
+      "default": "./dist/exports/accordion.js"
+    },
+    "./alert-dialog": {
+      "types": "./dist/exports/alert-dialog.d.ts",
+      "default": "./dist/exports/alert-dialog.js"
+    },
+    "./alert": {
+      "types": "./dist/exports/alert.d.ts",
+      "default": "./dist/exports/alert.js"
+    },
+    "./aspect-ratio": {
+      "types": "./dist/exports/aspect-ratio.d.ts",
+      "default": "./dist/exports/aspect-ratio.js"
+    },
+    "./avatar": {
+      "types": "./dist/exports/avatar.d.ts",
+      "default": "./dist/exports/avatar.js"
+    },
+    "./badge": {
+      "types": "./dist/exports/badge.d.ts",
+      "default": "./dist/exports/badge.js"
+    },
+    "./breadcrumb": {
+      "types": "./dist/exports/breadcrumb.d.ts",
+      "default": "./dist/exports/breadcrumb.js"
+    },
+    "./button": {
+      "types": "./dist/exports/button.d.ts",
+      "default": "./dist/exports/button.js"
+    },
+    "./calendar": {
+      "types": "./dist/exports/calendar.d.ts",
+      "default": "./dist/exports/calendar.js"
+    },
+    "./card": {
+      "types": "./dist/exports/card.d.ts",
+      "default": "./dist/exports/card.js"
+    },
+    "./carousel": {
+      "types": "./dist/exports/carousel.d.ts",
+      "default": "./dist/exports/carousel.js"
+    },
+    "./chart": {
+      "types": "./dist/exports/chart.d.ts",
+      "default": "./dist/exports/chart.js"
+    },
+    "./checkbox": {
+      "types": "./dist/exports/checkbox.d.ts",
+      "default": "./dist/exports/checkbox.js"
+    },
+    "./collapsible": {
+      "types": "./dist/exports/collapsible.d.ts",
+      "default": "./dist/exports/collapsible.js"
+    },
+    "./command": {
+      "types": "./dist/exports/command.d.ts",
+      "default": "./dist/exports/command.js"
+    },
+    "./context-menu": {
+      "types": "./dist/exports/context-menu.d.ts",
+      "default": "./dist/exports/context-menu.js"
+    },
+    "./dialog": {
+      "types": "./dist/exports/dialog.d.ts",
+      "default": "./dist/exports/dialog.js"
+    },
+    "./drawer": {
+      "types": "./dist/exports/drawer.d.ts",
+      "default": "./dist/exports/drawer.js"
+    },
+    "./dropdown-menu": {
+      "types": "./dist/exports/dropdown-menu.d.ts",
+      "default": "./dist/exports/dropdown-menu.js"
+    },
+    "./form": {
+      "types": "./dist/exports/form.d.ts",
+      "default": "./dist/exports/form.js"
+    },
+    "./hover-card": {
+      "types": "./dist/exports/hover-card.d.ts",
+      "default": "./dist/exports/hover-card.js"
+    },
+    "./input-otp": {
+      "types": "./dist/exports/input-otp.d.ts",
+      "default": "./dist/exports/input-otp.js"
+    },
+    "./input": {
+      "types": "./dist/exports/input.d.ts",
+      "default": "./dist/exports/input.js"
+    },
+    "./label": {
+      "types": "./dist/exports/label.d.ts",
+      "default": "./dist/exports/label.js"
+    },
+    "./menubar": {
+      "types": "./dist/exports/menubar.d.ts",
+      "default": "./dist/exports/menubar.js"
+    },
+    "./navigation-menu": {
+      "types": "./dist/exports/navigation-menu.d.ts",
+      "default": "./dist/exports/navigation-menu.js"
+    },
+    "./pagination": {
+      "types": "./dist/exports/pagination.d.ts",
+      "default": "./dist/exports/pagination.js"
+    },
+    "./popover": {
+      "types": "./dist/exports/popover.d.ts",
+      "default": "./dist/exports/popover.js"
+    },
+    "./progress": {
+      "types": "./dist/exports/progress.d.ts",
+      "default": "./dist/exports/progress.js"
+    },
+    "./radio-group": {
+      "types": "./dist/exports/radio-group.d.ts",
+      "default": "./dist/exports/radio-group.js"
+    },
+    "./resizable": {
+      "types": "./dist/exports/resizable.d.ts",
+      "default": "./dist/exports/resizable.js"
+    },
+    "./scroll-area": {
+      "types": "./dist/exports/scroll-area.d.ts",
+      "default": "./dist/exports/scroll-area.js"
+    },
+    "./select": {
+      "types": "./dist/exports/select.d.ts",
+      "default": "./dist/exports/select.js"
+    },
+    "./separator": {
+      "types": "./dist/exports/separator.d.ts",
+      "default": "./dist/exports/separator.js"
+    },
+    "./sheet": {
+      "types": "./dist/exports/sheet.d.ts",
+      "default": "./dist/exports/sheet.js"
+    },
+    "./sidebar": {
+      "types": "./dist/exports/sidebar.d.ts",
+      "default": "./dist/exports/sidebar.js"
+    },
+    "./skeleton": {
+      "types": "./dist/exports/skeleton.d.ts",
+      "default": "./dist/exports/skeleton.js"
+    },
+    "./slider": {
+      "types": "./dist/exports/slider.d.ts",
+      "default": "./dist/exports/slider.js"
+    },
+    "./sonner": {
+      "types": "./dist/exports/sonner.d.ts",
+      "default": "./dist/exports/sonner.js"
+    },
+    "./switch": {
+      "types": "./dist/exports/switch.d.ts",
+      "default": "./dist/exports/switch.js"
+    },
+    "./table": {
+      "types": "./dist/exports/table.d.ts",
+      "default": "./dist/exports/table.js"
+    },
+    "./tabs": {
+      "types": "./dist/exports/tabs.d.ts",
+      "default": "./dist/exports/tabs.js"
+    },
+    "./textarea": {
+      "types": "./dist/exports/textarea.d.ts",
+      "default": "./dist/exports/textarea.js"
+    },
+    "./toggle-group": {
+      "types": "./dist/exports/toggle-group.d.ts",
+      "default": "./dist/exports/toggle-group.js"
+    },
+    "./toggle": {
+      "types": "./dist/exports/toggle.d.ts",
+      "default": "./dist/exports/toggle.js"
+    },
+    "./tooltip": {
+      "types": "./dist/exports/tooltip.d.ts",
+      "default": "./dist/exports/tooltip.js"
     },
     "./styles.css": "./dist/styles.css"
   },
@@ -38,8 +220,9 @@
     "build:lib": "tsup",
     "build:css": "tailwindcss -i ./src/styles/index.css -o ./dist/styles.css --minify",
     "build:storybook": "storybook build",
+    "build:exports": "node generate-exports.js",
     "clean": "rimraf dist",
-    "build": "npm run clean && npm run build:lib && npm run build:css",
+    "build": "npm run clean && npm run build:exports && npm run build:lib && npm run build:css",
     "lint": "echo 'add eslint config if desired'",
     "test": "echo 'add tests (vitest/jest) if desired'",
     "package": "npm run build && npm pack"
@@ -70,7 +253,8 @@
   },
   "tsup": {
     "entry": [
-      "src/index.ts"
+      "src/index.ts",
+      "src/exports/*.ts"
     ],
     "format": [
       "esm",

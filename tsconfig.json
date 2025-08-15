@@ -16,6 +16,7 @@
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "outDir": "dist",
+    "rootDir": "src",
     "types": ["react", "react-dom"],
     "baseUrl": ".",
     "paths": {

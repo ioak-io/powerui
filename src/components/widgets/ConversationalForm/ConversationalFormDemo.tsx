@@ -5,6 +5,7 @@ import { FormFieldSchema, FormSchema } from '../../../types/uispec.types';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogBody, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { Accordion, AccordionItem } from '@/components/ui/accordion';
 
 const userNameField: FormFieldSchema = {
   name: "fullName",
@@ -286,6 +287,9 @@ const ConversationalFormDemo = () => {
       //   onChange={handleChange}
       //   schema={schema} onSubmit={(e) => { console.log(e) }} 
       />
+      <Accordion type='single'>
+        <AccordionItem value='test'>testttst</AccordionItem>
+      </Accordion>
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="outline">Share</Button>

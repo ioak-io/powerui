@@ -1,7 +1,13 @@
-import { Accordion as AccordionPrimitive } from "@/components/ui-library/accordion";
-import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
+import { Accordion as AccordionPrimitive, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui-library/accordion";
 
 const Accordion = AccordionPrimitive;
+const AccordionContentWrapper = AccordionContent;
+const AccordionItemWrapper = AccordionItem;
+const AccordionTriggerWrapper = AccordionTrigger;
 
-export { Accordion };
+export {
+    Accordion,
+    AccordionContentWrapper as AccordionContent,
+    AccordionItemWrapper as AccordionItem,
+    AccordionTriggerWrapper as AccordionTrigger
+};
